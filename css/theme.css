@@ -3,7 +3,7 @@
 /* LIGHT THEME (за замовчуванням) */
 :root,
 [data-theme="light"] {
-  --color-bg: #667eea;
+  --color-bg: #e2e8f0;
   --color-text: #2d3748;
   --color-white: #ffffff;
   --color-border: #000000;
