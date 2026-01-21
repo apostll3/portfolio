@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
             experienceTitle: 'Досвід',
             projectsTitle: 'Проєкти',
             servicesTitle: 'Послуги',
-            contactTitle: 'Контакти'
+            contactTitle: 'Контакти',
+            'hero-description': 'Поєдную код, дизайн і розуміння людей у рішення, що реально працюють. Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.',
+            projects: 'Проєкти',
+            contact: 'Контакт'
         },
         en: {
             brandName: 'Dmitriy Apostle',
@@ -33,7 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
             experienceTitle: 'Experience',
             projectsTitle: 'Projects',
             servicesTitle: 'Services',
-            contactTitle: 'Contact'
+            contactTitle: 'Contact',
+            'hero-description': 'I combine code, design, and understanding people into solutions that actually work. I believe in honest approach, healthy boundaries, and balance between tech and meaning.',
+            projects: 'Projects',
+            contact: 'Contact'
         }
     };
 
@@ -109,5 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#contact h2').textContent = t.contactTitle;
 
         document.querySelector('.brand-name').textContent = t.brandName;
+
+        document.querySelector('[data-i18n="hero-description"]').textContent = t['hero-description'];
+  document.querySelector('[data-i18n="projects"]').textContent = t.projects;
+  document.querySelector('[data-i18n="contact"]').textContent = t.contact;
     }
 });
