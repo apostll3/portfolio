@@ -1,0 +1,8 @@
+/* ================= BASE ================= */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+

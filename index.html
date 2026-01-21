@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dmitriy Apostle — Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+
+  <!-- SVG FRAME -->
+  <div class="frame-container">
+    <div class="frame-svg" data-svg="assets/svg/header-frame.svg"></div>
+
+  </div>
+
+  <!-- HEADER CONTENT -->
+  <div class="header-container">
+    <div class="header-content">
+
+      <div class="brand">
+        <div class="brand-photo">
+          <img src="assets/img/avatar.png" alt="Avatar">
+        </div>
+        <div class="brand-name">Dmitriy Apostle</div>
+      </div>
+
+      <nav class="nav">
+        <a href="#about" class="nav-link" data-i18n="about">About</a>
+        <a href="#skills" class="nav-link" data-i18n="skills">Skills</a>
+        <a href="#experience" class="nav-link" data-i18n="experience">Experience</a>
+        <a href="#projects" class="nav-link" data-i18n="projects">Projects</a>
+        <a href="#services" class="nav-link" data-i18n="services">Services</a>
+        <a href="#contact" class="nav-link" data-i18n="contact">Contact</a>
+      </nav>
+
+      <!-- THEME & LANGUAGE CONTROLS -->
+      <div class="controls">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <!-- SVG буде вставлено через JS -->
+        </button>
+        <button id="lang-toggle" class="lang-toggle" aria-label="Toggle language">
+          UA
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+
+  <section id="about">
+    <h2>About</h2>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+  </section>
+
+  <section id="services">
+    <h2>Services</h2>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+  </section>
+
+</main>
+
+<!-- JS -->
+<script src="js/main.js"></script>
+<script src="js/svgscript.js"></script>
+<script src="js/theme-lang.js"></script>
+
+</body>
+</html>

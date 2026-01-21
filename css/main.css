@@ -1,0 +1,13 @@
+.main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--padding-x);
+  padding-top: var(--header-height);
+
+}
+
+section {
+  min-height: 100vh;
+  padding-top: calc(var(--header-height) + 40px);
+  margin-top: calc(-1 * (var(--header-height) + 40px));
+}

@@ -1,0 +1,13 @@
+/* ================= VARIABLES ================= */
+:root {
+  --max-width: 1720px;
+  --padding-x: 20px;
+
+  --color-bg: #667eea;
+  --color-text: #2d3748;
+  --color-white: #ffffff;
+  --color-border: #000000;
+
+  --transition: 0.3s ease;
+  --header-height: 120px;
+}

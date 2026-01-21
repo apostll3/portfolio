@@ -1,0 +1,128 @@
+/* ================= THEME VARIABLES ================= */
+
+/* LIGHT THEME (за замовчуванням) */
+:root,
+[data-theme="light"] {
+  --color-bg: #667eea;
+  --color-text: #2d3748;
+  --color-white: #ffffff;
+  --color-border: #000000;
+}
+
+/* DARK THEME */
+[data-theme="dark"] {
+  --color-bg: #1a202c;
+  --color-text: #e2e8f0;
+  --color-white: #2d3748;
+  --color-border: #4a5568;
+}
+
+/* ================= THEME & LANG CONTROLS ================= */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.theme-toggle,
+.lang-toggle {
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 0 12px;
+  min-width: 0;
+  gap: 6px;
+}
+
+/* Theme toggle — квадратна, але з іконкою 20x20 */
+.theme-toggle {
+  width: 40px;
+  padding: 0;
+  gap: 0;
+}
+
+/* Lang toggle — з іконкою + текстом */
+.lang-toggle {
+  min-width: 68px;
+  padding: 0 12px;
+  gap: 6px;
+}
+
+/* Уніфікуємо іконки — всі 20x20 */
+.theme-toggle svg,
+.lang-toggle svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+/* Для іконки мови — додаємо padding, щоб вона була центральна */
+.lang-toggle svg {
+  padding: 2px;
+  box-sizing: content-box;
+}
+
+/* Текст мови — трохи менший, але чіткий */
+.lang-text {
+  line-height: 1;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  font-size: 0.875rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .theme-toggle,
+  .lang-toggle {
+    height: 38px;
+  }
+  
+  .lang-toggle {
+    min-width: 58px;
+    padding: 0 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .controls {
+    gap: 8px;
+  }
+  
+  .theme-toggle,
+  .lang-toggle {
+    height: 36px;
+  }
+  
+  .lang-toggle {
+    min-width: 54px;
+    padding: 0 6px;
+    gap: 4px;
+  }
+  
+  .lang-toggle svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .lang-text {
+    font-size: 0.8rem;
+  }
+}
