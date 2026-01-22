@@ -9,6 +9,7 @@
   display: inline-block;
    text-decoration: none;  
   color: var(--color-text);
+      font-weight: 500;
 }
 
 .nav-link::after {

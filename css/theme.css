@@ -12,9 +12,9 @@
 /* DARK THEME */
 [data-theme="dark"] {
   --color-bg: #1a202c;
-  --color-text: #e2e8f0;
+  --color-text: #ffffff;
   --color-white: #2d3748;
-  --color-border: #4a5568;
+  --color-border: #efefef;
 }
 
 /* ================= THEME & LANG CONTROLS ================= */

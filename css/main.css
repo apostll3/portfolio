@@ -3,7 +3,9 @@
   margin: 0 auto;
   padding: 0 var(--padding-x);
   padding-top: calc(var(--header-height) + var(--padding-x));
-
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-x);
 }
 
 section {
@@ -43,6 +45,11 @@ section {
   z-index: 2;
   filter: grayscale(100%);
   border-radius: 32px;
+}
+
+/* Інвертуємо фонове зображення героя в темній темі */
+[data-theme="dark"] #main-header::before {
+  filter: grayscale(100%) invert(1);
 }
 
 /* SVG РАМКА для main-header */
@@ -89,6 +96,7 @@ section {
   gap: 64px;
   width: 100%;
   max-width: var(--max-width);
+  
 }
 
 /* AVATAR */
@@ -109,14 +117,19 @@ section {
   object-fit: cover;
 }
 
+/* Інвертуємо фонове зображення героя в темній темі */
+[data-theme="dark"] .hero-avatar img{
+  filter: grayscale(100%) invert(1);
+}
+
 /* TEXT BLOCK */
 .hero-text {
   max-width: 560px;
 }
 
 .hero-name {
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
+  font-family: 'Caveat', cursive;
+  font-weight: 900;
   font-size: 2.75rem;
   line-height: 1.15;
   margin: 0 0 8px;

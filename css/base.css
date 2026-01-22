@@ -4,4 +4,112 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  position: relative;
+}
+/* 
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+
+  background-image:
+    repeating-linear-gradient(45deg,
+      rgba(0, 0, 0, 0.04) 0,
+      rgba(0, 0, 0, 0.04) 1px,
+      transparent 1px,
+      transparent 3px),
+    repeating-linear-gradient(-45deg,
+      rgba(0, 0, 0, 0.03) 0,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 3px);
+}
+
+
+[data-theme="dark"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+} */
+
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.54) 0,
+      rgba(0, 0, 0, 0.54) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.53) 0,
+      rgba(0, 0, 0, 0.53) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+[data-theme="dark"] body::before {
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgb(255, 255, 255) 0,
+      rgb(255, 255, 255) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.943) 0,
+      rgba(255, 255, 255, 0.802) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+
+
+
+
+/* Для header-frame и mainheader-frame */
+.frame-svg .frame-bg,
+.main-header-frame-svg .frame-bg {
+  fill: var(--color-bg);
 }

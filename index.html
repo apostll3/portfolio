@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap"
+    rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
@@ -17,110 +20,293 @@
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
+  <!-- ================= HEADER ================= -->
+  <header class="header">
 
-  <!-- SVG FRAME -->
-  <div class="frame-container">
-    <div class="frame-svg" data-svg="assets/svg/header-frame.svg"></div>
+    <!-- SVG FRAME -->
+    <div class="frame-container">
+      <div class="frame-svg" data-svg="assets/svg/header-frame.svg"></div>
 
-  </div>
+    </div>
 
-  <!-- HEADER CONTENT -->
-  <div class="header-container">
-    <div class="header-content">
+    <!-- HEADER CONTENT -->
+    <div class="header-container">
+      <div class="header-content">
 
-      <div class="brand">
-        <div class="brand-photo">
-          <div class="avatar-frame" data-svg="assets/svg/avatar-frame.svg"></div>
-          <img src="assets/img/avatar.png" alt="Avatar">
+        <div class="brand">
+          <div class="brand-photo">
+            <div class="avatar-frame" data-svg="assets/svg/avatar-frame.svg"></div>
+            <img src="assets/img/avatarpng.png" alt="Avatar">
+          </div>
+          <div class="brand-name">Dmitriy Apostle</div>
         </div>
-        <div class="brand-name">Dmitriy Apostle</div>
+
+        <nav class="nav">
+          <a href="#about" class="nav-link" data-i18n="about">About</a>
+          <a href="#skills" class="nav-link" data-i18n="skills">Skills</a>
+          <a href="#experience" class="nav-link" data-i18n="experience">Experience</a>
+          <a href="#projects" class="nav-link" data-i18n="projects">Projects</a>
+          <a href="#services" class="nav-link" data-i18n="services">Services</a>
+          <a href="#contact" class="nav-link" data-i18n="contact">Contact</a>
+        </nav>
+
+        <!-- THEME & LANGUAGE CONTROLS -->
+        <div class="controls">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <!-- SVG буде вставлено через JS -->
+          </button>
+          <button id="lang-toggle" class="lang-toggle" aria-label="Toggle language">
+            UA
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main class="main">
+
+    <section id="main-header">
+
+      <div class="main-header-frame-container">
+        <div class="main-header-frame-svg" data-svg="assets/svg/mainheader-frame.svg"></div>
       </div>
 
-      <nav class="nav">
-        <a href="#about" class="nav-link" data-i18n="about">About</a>
-        <a href="#skills" class="nav-link" data-i18n="skills">Skills</a>
-        <a href="#experience" class="nav-link" data-i18n="experience">Experience</a>
-        <a href="#projects" class="nav-link" data-i18n="projects">Projects</a>
-        <a href="#services" class="nav-link" data-i18n="services">Services</a>
-        <a href="#contact" class="nav-link" data-i18n="contact">Contact</a>
-      </nav>
 
-      <!-- THEME & LANGUAGE CONTROLS -->
-      <div class="controls">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <!-- SVG буде вставлено через JS -->
-        </button>
-        <button id="lang-toggle" class="lang-toggle" aria-label="Toggle language">
-          UA
-        </button>
+      <div class="hero-content">
+        <div class="hero-avatar">
+          <img src="assets/img/avatarpng.png" alt="Dmitriy Apostle">
+        </div>
+        <div class="hero-text">
+          <h1 class="hero-name">Dmitriy Apostle</h1>
+          <p class="hero-title">Web / Full-stack Developer & Content Creator</p>
+          <p class="hero-description" data-i18n="hero-description">
+            Поєдную код, дизайн і розуміння людей у рішення, що реально працюють.
+            Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary" data-i18n="projects">Проєкти</a>
+            <a href="#contact" class="btn btn-secondary" data-i18n="contact">Контакт</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+ <section id="about">
+      <div class="about-container">
+        <h2 class="about-title" data-i18n="aboutTitle">Про мене</h2>
+
+        <!-- Intro block з аватаром -->
+        <div class="about-intro">
+          <div class="about-intro-avatar">
+            <img src="assets/img/avatarpng.png" alt="Dmitriy Apostle">
+            <div class="avatar-frame" data-svg="assets/svg/avatar-frame.svg"></div>
+          </div>
+          <div class="about-intro-content">
+            <p class="about-intro-text" data-i18n="about-intro">
+              Я full-stack веб-розробник з комерційним досвідом роботи як у командному, так і в проєктному середовищі.
+            </p>
+            <div class="about-intro-stats">
+              <div class="stat-item">
+                <span class="stat-number">3+</span>
+                <span class="stat-label" data-i18n="stat-years">роки досвіду</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label" data-i18n="stat-projects">проєктів</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label" data-i18n="stat-remote">віддалено</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-grid">
+          <!-- Блок 2: Шлях і досвід -->
+          <div class="about-card about-journey">
+            <div class="about-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <h3 data-i18n="about-journey-title">Шлях</h3>
+            <p data-i18n="about-journey-text">
+              Мій професійний шлях почався з позиції junior frontend-розробника, де я працював з React та TypeScript у
+              команді та взаємодіяв з backend-сервісами на .NET. Згодом я перейшов до проєктної роботи, беручи участь у
+              різноманітних клієнтських та внутрішніх проєктах з різними вимогами, дедлайнами та рівнем визначеності.
+            </p>
+          </div>
+
+          <!-- Блок 3: Як працюю -->
+          <div class="about-card about-approach">
+            <div class="about-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3 data-i18n="about-approach-title">Підхід</h3>
+            <p data-i18n="about-approach-text">
+              Я можу самостійно створювати веб-застосунки та інтерфейси, брати відповідальність за інтеграцію frontend і
+              backend та ефективно працювати навіть у ситуаціях, коли вимоги формуються в процесі розробки. Ціную чисту
+              архітектуру, читабельний код і рішення, які залишаються зрозумілими та підтримуваними з часом.
+            </p>
+          </div>
+
+          <!-- Блок 4: Людський фактор -->
+          <div class="about-card about-communication">
+            <div class="about-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3 data-i18n="about-communication-title">Комунікація</h3>
+            <p data-i18n="about-communication-text">
+              Окрім технічної роботи, маю досвід координації задач, комунікації зі стейкхолдерами та участі у прийнятті
+              продуктових рішень. Підходжу до розробки спокійно та відповідально, з фокусом на стабільний і практичний
+              результат, а не на гонитву за трендами.
+            </p>
+          </div>
+        </div>
       </div>
 
-    </div>
-  </div>
-</header>
-</header>
 
-<!-- ================= MAIN ================= -->
-<main class="main">
+    </section>
 
- <section id="main-header">
+    <!-- Додай цю секцію після #about і перед #skills -->
 
-  <div class="main-header-frame-container">
-    <div class="main-header-frame-svg" data-svg="assets/svg/mainheader-frame.svg"></div>
-  </div>
+<section id="values">
+  <div class="values-container">
+    <h2 class="values-title" data-i18n="valuesTitle">Цінності</h2>
+    
+    <div class="values-grid">
+      <!-- Value 1: Чесність -->
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <h3 data-i18n="value-honesty-title">Чесність</h3>
+        <p data-i18n="value-honesty-text">
+          Прозорість у комунікації, реалістичні оцінки термінів, відкритість щодо складності та обмежень. Краще сказати "не знаю" і розібратися, ніж імітувати впевненість.
+        </p>
+      </div>
 
+      <!-- Value 2: Відповідальність -->
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 11 12 14 22 4"></polyline>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          </svg>
+        </div>
+        <h3 data-i18n="value-responsibility-title">Відповідальність</h3>
+        <p data-i18n="value-responsibility-text">
+          Беру на себе результат, а не лише процес. Якщо щось не працює — шукаю рішення, а не причини. Завершую те, що починаю.
+        </p>
+      </div>
 
-  <div class="hero-content">
-    <div class="hero-avatar">
-      <img src="assets/img/avatarpng.png" alt="Dmitriy Apostle">
-    </div>
-    <div class="hero-text">
-      <h1 class="hero-name">Dmitriy Apostle</h1>
-      <p class="hero-title">Web / Full-stack Developer & Content Creator</p>
-      <p class="hero-description" data-i18n="hero-description">
-        Поєдную код, дизайн і розуміння людей у рішення, що реально працюють.
-        Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary" data-i18n="projects">Проєкти</a>
-        <a href="#contact" class="btn btn-secondary" data-i18n="contact">Контакт</a>
+      <!-- Value 3: Межі -->
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <h3 data-i18n="value-boundaries-title">Здорові межі</h3>
+        <p data-i18n="value-boundaries-text">
+          Вмію сказати "ні", коли це потрібно. Не беру на себе те, що не зможу якісно виконати. Поважаю свій час і час інших.
+        </p>
+      </div>
+
+      <!-- Value 4: Баланс -->
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <h3 data-i18n="value-balance-title">Баланс</h3>
+        <p data-i18n="value-balance-text">
+          Не вірю в крайнощі — ані в "тільки технічність", ані в "креатив без структури". Шукаю те, що працює стабільно і має сенс.
+        </p>
+      </div>
+
+      <!-- Value 5: Зміст -->
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <h3 data-i18n="value-meaning-title">Зміст</h3>
+        <p data-i18n="value-meaning-text">
+          Важливо не лише "що" робити, але й "навіщо". Ціную проєкти, де бачу логіку, користь і можливість зростання.
+        </p>
+      </div>
+
+      <!-- Value 6: Розвиток -->
+      <div class="value-card">
+        <div class="value-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="20" x2="12" y2="10"></line>
+            <line x1="18" y1="20" x2="18" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="16"></line>
+          </svg>
+        </div>
+        <h3 data-i18n="value-growth-title">Розвиток</h3>
+        <p data-i18n="value-growth-text">
+          Постійно вчуся, але без гонитви за трендами. Фокусуюсь на тому, що реально використовую і що робить мене кращим у тому, чим займаюся.
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-  <section id="about">
-    <h2>About</h2>
-  </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-  </section>
+    <section id="skills">
+      <h2>Skills</h2>
+    </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
-  </section>
+    <section id="experience">
+      <h2>Experience</h2>
+    </section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-  </section>
+    <section id="projects">
+      <h2>Projects</h2>
+    </section>
 
-  <section id="services">
-    <h2>Services</h2>
-  </section>
+    <section id="services">
+      <h2>Services</h2>
+    </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-  </section>
+    <section id="contact">
+      <h2>Contact</h2>
+    </section>
 
-</main>
+  </main>
 
-<!-- JS -->
-<script src="js/main.js"></script>
-<script src="js/svgscript.js"></script>
-<script src="js/theme-lang.js"></script>
+  <!-- JS -->
+  <script src="js/main.js"></script>
+  <script src="js/svgscript.js"></script>
+  <script src="js/theme-lang.js"></script>
 
 </body>
+
 </html>
