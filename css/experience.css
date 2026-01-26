@@ -1,0 +1,349 @@
+/* ================= EXPERIENCE SECTION ================= */
+#experience {
+  position: relative;
+}
+
+.experience-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.experience-title {
+  font-family: 'Caveat', cursive;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: var(--padding-x);
+  text-align: left;
+  color: var(--color-text);
+}
+
+.experience-timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+/* Timeline line */
+.experience-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.experience-item {
+  position: relative;
+  margin-bottom: 48px;
+  padding: 32px;
+  border-radius: 24px;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg);
+  transition: all var(--transition);
+  overflow: hidden;
+}
+
+.experience-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/img/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.03;
+  z-index: 0;
+  filter: grayscale(100%);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .experience-item::before {
+  filter: grayscale(100%) invert(1);
+}
+
+.experience-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Timeline dot */
+.experience-item::after {
+  content: '';
+  position: absolute;
+  left: -52px;
+  top: 40px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-text);
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 2px var(--color-border);
+  z-index: 2;
+}
+
+.experience-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 20px;
+}
+
+.experience-role {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0 0 8px;
+  color: var(--color-text);
+}
+
+.experience-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.experience-stack,
+.experience-company,
+.experience-period {
+  font-size: 0.9375rem;
+  color: var(--color-text);
+  opacity: 0.75;
+  font-weight: 500;
+}
+
+.experience-stack {
+  font-family: 'Courier New', monospace;
+  opacity: 0.85;
+}
+
+.experience-period {
+  color: var(--color-text);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.experience-description {
+  position: relative;
+  z-index: 1;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+.experience-list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  opacity: 0.85;
+}
+
+.experience-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-text);
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
+
+.experience-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Additional Experience Card */
+.experience-additional {
+  padding: 32px;
+  border-radius: 24px;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-additional::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/img/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.03;
+  z-index: 0;
+  filter: grayscale(100%);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .experience-additional::before {
+  filter: grayscale(100%) invert(1);
+}
+
+.experience-additional:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.experience-additional-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.375rem;
+  margin: 0 0 20px;
+  color: var(--color-text);
+  position: relative;
+  z-index: 1;
+}
+
+.experience-additional-content {
+  position: relative;
+  z-index: 1;
+}
+
+.experience-additional-item {
+  margin-bottom: 24px;
+}
+
+.experience-additional-item:last-child {
+  margin-bottom: 0;
+}
+
+.experience-additional-role {
+  font-weight: 600;
+  font-size: 1.0625rem;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.experience-additional-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-additional-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  opacity: 0.85;
+}
+
+.experience-additional-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--color-text);
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+  .experience-title {
+    font-size: 2.25rem;
+  }
+  
+  .experience-item {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .experience-title {
+    font-size: 2rem;
+    margin-bottom: 36px;
+  }
+  
+  .experience-timeline {
+    padding-left: 0;
+  }
+  
+  .experience-timeline::before {
+    display: none;
+  }
+  
+  .experience-item::after {
+    display: none;
+  }
+  
+  .experience-item {
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .experience-item:hover {
+    transform: translateY(-4px);
+  }
+  
+  .experience-role {
+    font-size: 1.25rem;
+  }
+  
+  .experience-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .experience-additional {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-title {
+    font-size: 1.75rem;
+    margin-bottom: 28px;
+  }
+  
+  .experience-item {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .experience-role {
+    font-size: 1.125rem;
+  }
+  
+  .experience-stack,
+  .experience-company,
+  .experience-period {
+    font-size: 0.875rem;
+  }
+  
+  .experience-description,
+  .experience-list li,
+  .experience-additional-list li {
+    font-size: 0.875rem;
+  }
+  
+  .experience-additional {
+    padding: 20px;
+  }
+  
+  .experience-additional-title {
+    font-size: 1.25rem;
+  }
+}
