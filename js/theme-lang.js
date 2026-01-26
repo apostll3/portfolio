@@ -6,40 +6,122 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== TRANSLATIONS =====
     const translations = {
         ua: {
-            brandName: 'Дмитро Апостол',
+            // Navigation
             about: 'Про мене',
             skills: 'Навички',
             experience: 'Досвід',
             projects: 'Проєкти',
             services: 'Послуги',
             contact: 'Контакти',
+            
+            // Brand
+            brandName: 'Дмитро Апостол',
+            
+            // Hero Section
+            'hero-description': 'Поєдную код, дизайн і розуміння людей у рішення, що реально працюють. Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.',
+            
+            // About Section
             aboutTitle: 'Про мене',
+            'about-intro': 'Я full-stack веб-розробник з комерційним досвідом роботи як у командному, так і в проєктному середовищі.',
+            'stat-years': 'роки досвіду',
+            'stat-projects': 'проєктів',
+            'stat-remote': 'віддалено',
+            
+            'about-journey-title': 'Шлях',
+            'about-journey-text': 'Мій професійний шлях почався з позиції junior frontend-розробника, де я працював з React та TypeScript у команді та взаємодіяв з backend-сервісами на .NET. Згодом я перейшов до проєктної роботи, беручи участь у різноманітних клієнтських та внутрішніх проєктах з різними вимогами, дедлайнами та рівнем визначеності.',
+            
+            'about-approach-title': 'Підхід',
+            'about-approach-text': 'Я можу самостійно створювати веб-застосунки та інтерфейси, брати відповідальність за інтеграцію frontend і backend та ефективно працювати навіть у ситуаціях, коли вимоги формуються в процесі розробки. Ціную чисту архітектуру, читабельний код і рішення, які залишаються зрозумілими та підтримуваними з часом.',
+            
+            'about-communication-title': 'Комунікація',
+            'about-communication-text': 'Окрім технічної роботи, маю досвід координації задач, комунікації зі стейкхолдерами та участі у прийнятті продуктових рішень. Підходжу до розробки спокійно та відповідально, з фокусом на стабільний і практичний результат, а не на гонитву за трендами.',
+            
+            // Values Section
+            valuesTitle: 'Цінності',
+            
+            'value-honesty-title': 'Чесність',
+            'value-honesty-text': 'Прозорість у комунікації, реалістичні оцінки термінів, відкритість щодо складності та обмежень. Краще сказати "не знаю" і розібратися, ніж імітувати впевненість.',
+            
+            'value-responsibility-title': 'Відповідальність',
+            'value-responsibility-text': 'Беру на себе результат, а не лише процес. Якщо щось не працює — шукаю рішення, а не причини. Завершую те, що починаю.',
+            
+            'value-boundaries-title': 'Здорові межі',
+            'value-boundaries-text': 'Вмію сказати "ні", коли це потрібно. Не беру на себе те, що не зможу якісно виконати. Поважаю свій час і час інших.',
+            
+            'value-balance-title': 'Баланс',
+            'value-balance-text': 'Не вірю в крайнощі — ані в "тільки технічність", ані в "креатив без структури". Шукаю те, що працює стабільно і має сенс.',
+            
+            'value-meaning-title': 'Зміст',
+            'value-meaning-text': 'Важливо не лише "що" робити, але й "навіщо". Ціную проєкти, де бачу логіку, користь і можливість зростання.',
+            
+            'value-growth-title': 'Розвиток',
+            'value-growth-text': 'Постійно вчуся, але без гонитви за трендами. Фокусуюсь на тому, що реально використовую і що робить мене кращим у тому, чим займаюся.',
+            
+            // Section Titles
             skillsTitle: 'Навички',
             experienceTitle: 'Досвід',
             projectsTitle: 'Проєкти',
             servicesTitle: 'Послуги',
-            contactTitle: 'Контакти',
-            'hero-description': 'Поєдную код, дизайн і розуміння людей у рішення, що реально працюють. Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.',
-            projects: 'Проєкти',
-            contact: 'Контакт'
+            contactTitle: 'Контакти'
         },
         en: {
-            brandName: 'Dmitriy Apostle',
+            // Navigation
             about: 'About',
             skills: 'Skills',
             experience: 'Experience',
             projects: 'Projects',
             services: 'Services',
             contact: 'Contact',
-            aboutTitle: 'About',
+            
+            // Brand
+            brandName: 'Dmitriy Apostle',
+            
+            // Hero Section
+            'hero-description': 'I combine code, design, and understanding people into solutions that actually work. I believe in honest approach, healthy boundaries, and balance between tech and meaning.',
+            
+            // About Section
+            aboutTitle: 'About Me',
+            'about-intro': 'I am a full-stack web developer with commercial experience working in both team and project-based environments.',
+            'stat-years': 'years of experience',
+            'stat-projects': 'projects',
+            'stat-remote': 'remote',
+            
+            'about-journey-title': 'Journey',
+            'about-journey-text': 'My professional journey began as a junior frontend developer, where I worked with React and TypeScript in a team and interacted with backend services on .NET. Later, I transitioned to project-based work, participating in various client and internal projects with different requirements, deadlines, and levels of uncertainty.',
+            
+            'about-approach-title': 'Approach',
+            'about-approach-text': 'I can independently create web applications and interfaces, take responsibility for frontend and backend integration, and work effectively even in situations where requirements are formed during development. I value clean architecture, readable code, and solutions that remain clear and maintainable over time.',
+            
+            'about-communication-title': 'Communication',
+            'about-communication-text': 'Beyond technical work, I have experience coordinating tasks, communicating with stakeholders, and participating in product decision-making. I approach development calmly and responsibly, focusing on stable and practical results rather than chasing trends.',
+            
+            // Values Section
+            valuesTitle: 'Values',
+            
+            'value-honesty-title': 'Honesty',
+            'value-honesty-text': 'Transparency in communication, realistic time estimates, openness about complexity and limitations. Better to say "I don\'t know" and figure it out than to fake confidence.',
+            
+            'value-responsibility-title': 'Responsibility',
+            'value-responsibility-text': 'I take ownership of results, not just processes. If something doesn\'t work — I look for solutions, not excuses. I finish what I start.',
+            
+            'value-boundaries-title': 'Healthy Boundaries',
+            'value-boundaries-text': 'I know how to say "no" when needed. I don\'t take on what I can\'t deliver with quality. I respect my time and others\' time.',
+            
+            'value-balance-title': 'Balance',
+            'value-balance-text': 'I don\'t believe in extremes — neither in "only technical" nor in "creativity without structure". I seek what works consistently and makes sense.',
+            
+            'value-meaning-title': 'Meaning',
+            'value-meaning-text': 'It\'s important not only "what" to do, but "why". I value projects where I see logic, benefit, and opportunity for growth.',
+            
+            'value-growth-title': 'Growth',
+            'value-growth-text': 'I constantly learn, but without chasing trends. I focus on what I actually use and what makes me better at what I do.',
+            
+            // Section Titles
             skillsTitle: 'Skills',
             experienceTitle: 'Experience',
             projectsTitle: 'Projects',
             servicesTitle: 'Services',
-            contactTitle: 'Contact',
-            'hero-description': 'I combine code, design, and understanding people into solutions that actually work. I believe in honest approach, healthy boundaries, and balance between tech and meaning.',
-            projects: 'Projects',
-            contact: 'Contact'
+            contactTitle: 'Contact'
         }
     };
 
@@ -64,14 +146,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== LANGUAGE SWITCHER =====
     const savedLang = localStorage.getItem('lang') || 'ua';
-    document.documentElement.setAttribute('lang', savedLang);
+    html.setAttribute('lang', savedLang);
     updateLangButton(savedLang);
-    translatePage(savedLang); // ✅ тепер translations вже доступна
+    translatePage(savedLang);
 
     langToggle.addEventListener('click', () => {
-        const currentLang = document.documentElement.getAttribute('lang');
+        const currentLang = html.getAttribute('lang');
         const newLang = currentLang === 'ua' ? 'en' : 'ua';
-        document.documentElement.setAttribute('lang', newLang);
+        html.setAttribute('lang', newLang);
         localStorage.setItem('lang', newLang);
         updateLangButton(newLang);
         translatePage(newLang);
@@ -79,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateLangButton(lang) {
         langToggle.innerHTML = `
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g clip-path="url(#clip0_1046_5900)">
       <path d="M23.83 10.57C23.61 8.67998 23.74 6.48998 23.21 4.64998C23.0423 3.94979 22.7308 3.29215 22.2953 2.71887C21.8597 2.14558 21.3096 1.66919 20.68 1.31998C20.1542 1.03044 19.5879 0.821441 19 0.699977C18.1253 0.54817 17.2372 0.487845 16.35 0.519977L12.94 0.669977L10.38 0.819977C8.2471 0.859996 6.13015 1.19656 4.09 1.81998C3.35095 2.00574 2.6749 2.38544 2.13169 2.91987C1.58847 3.45429 1.19779 4.12406 1 4.85998C0.985478 4.94351 1.0047 5.0294 1.05345 5.09877C1.1022 5.16814 1.17649 5.21533 1.26 5.22998C1.30073 5.24195 1.34348 5.24543 1.3856 5.2402C1.42773 5.23497 1.46833 5.22115 1.5049 5.19958C1.54146 5.17802 1.57321 5.14918 1.59817 5.11484C1.62313 5.08051 1.64077 5.04141 1.65 4.99998C2.24 1.99998 7.4 1.77998 10.43 1.62998L13 1.48998L16.36 1.38998C17.6969 1.29299 19.0356 1.55176 20.24 2.13998C20.7476 2.43976 21.1874 2.84163 21.5317 3.32015C21.8759 3.79867 22.1171 4.34344 22.24 4.91998C22.73 6.71998 22.57 8.84998 22.77 10.69C22.87 11.69 22.92 13.37 22.9 15.02C22.8926 16.467 22.8058 17.9125 22.64 19.35C22.5432 19.6847 22.3712 19.9929 22.1373 20.2511C21.9033 20.5093 21.6135 20.7107 21.29 20.84C19.5027 21.6326 17.5906 22.1064 15.64 22.24C12.2397 22.6039 8.81029 22.6039 5.41 22.24C4.61685 22.2093 3.83658 22.0295 3.11 21.71C1.62 20.5 1 18.46 0.780001 16.21C0.470001 12.83 1.09 8.97998 1.29 6.62998C1.29284 6.5907 1.28737 6.55127 1.27394 6.51426C1.2605 6.47724 1.23942 6.44348 1.21205 6.41517C1.18468 6.38685 1.15165 6.36463 1.11511 6.34995C1.07857 6.33528 1.03935 6.32847 1 6.32998C0.963735 6.32584 0.927006 6.32909 0.892034 6.33955C0.857063 6.35001 0.824574 6.36745 0.796533 6.39082C0.768492 6.41418 0.74548 6.44299 0.728888 6.47551C0.712296 6.50802 0.702469 6.54356 0.700001 6.57998C0.480001 8.99998 -0.199999 12.84 0.0600008 16.27C0.250001 18.77 0.960001 21.01 2.61 22.34C3.44719 22.7681 4.36206 23.0232 5.3 23.09C8.77565 23.5395 12.2903 23.6032 15.78 23.28C17.8543 23.1542 19.8879 22.6492 21.78 21.79C22.2592 21.5914 22.6836 21.2806 23.0178 20.8839C23.3519 20.4871 23.5858 20.016 23.7 19.51C23.8809 18.0131 23.981 16.5076 24 15C24.0255 13.5213 23.9687 12.0424 23.83 10.57Z" fill="currentColor"/>
       <path d="M10.09 5.87999C9.79715 5.36195 9.3902 4.91738 8.9 4.57999C8.56339 4.30719 8.14327 4.15833 7.71 4.15833C7.27673 4.15833 6.85661 4.30719 6.52 4.57999C5.77565 5.30285 5.20469 6.18492 4.85 7.15999C4.71 7.50999 4.58 7.85999 4.47 8.21999C4.36 8.57999 4.2 9.21999 4.08 9.65999C3.74 9.65999 3.42 9.65999 3.4 9.93999C3.38 10.22 3.67 10.26 3.93 10.3C3.82 10.77 3.72 11.24 3.64 11.71C3.53 12.3483 3.45986 12.9929 3.43 13.64C3.42587 13.6776 3.42939 13.7156 3.44035 13.7518C3.45132 13.788 3.46949 13.8216 3.49379 13.8505C3.51809 13.8795 3.548 13.9032 3.58172 13.9203C3.61544 13.9374 3.65227 13.9475 3.69 13.95C3.76369 13.9529 3.83573 13.9277 3.89146 13.8794C3.94719 13.8311 3.98243 13.7634 3.99 13.69C4.05938 13.0668 4.16961 12.4488 4.32 11.84C4.42 11.37 4.56 10.9 4.7 10.43C5.18338 10.5018 5.67132 10.5386 6.16 10.54C6.65 10.54 7.16 10.48 7.64 10.43C8.37 10.35 9.08 10.22 9.81 10.17C9.89348 10.1679 9.97325 10.1351 10.0341 10.0779C10.095 10.0207 10.1327 9.94317 10.14 9.85999C10.1413 9.81714 10.1341 9.77445 10.1186 9.73446C10.1031 9.69448 10.0797 9.65801 10.0499 9.62723C10.02 9.59644 9.9843 9.57197 9.94481 9.55527C9.90532 9.53857 9.86288 9.52997 9.82 9.52999C8.49106 9.37693 7.14894 9.37693 5.82 9.52999L5 9.59999C5.12 9.23999 5.24 8.87999 5.37 8.51999C5.49377 8.19966 5.63395 7.88591 5.79 7.57999C6.08762 6.76936 6.56646 6.03741 7.19 5.43999C7.8 4.99999 8.43 5.46999 9 6.06999C9.06 6.22999 10 7.06999 10.26 10.07C10.3857 11.2366 10.3857 12.4134 10.26 13.58C10.2484 13.6646 10.27 13.7505 10.3204 13.8195C10.3707 13.8885 10.4459 13.9353 10.53 13.95C10.6146 13.9616 10.7005 13.94 10.7695 13.8896C10.8385 13.8393 10.8853 13.7641 10.9 13.68C11.0592 12.4801 11.0927 11.2669 11 10.06C10.9928 8.6183 10.6828 7.19419 10.09 5.87999Z" fill="currentColor"/>
@@ -93,31 +175,45 @@ document.addEventListener('DOMContentLoaded', () => {
       </clipPath>
     </defs>
   </svg>
-      <span class="lang-text">${lang.toUpperCase()}</span>
-    `;
+            <span class="lang-text">${lang.toUpperCase()}</span>
+        `;
     }
 
+    // ===== UNIVERSAL TRANSLATION FUNCTION =====
     function translatePage(lang) {
-        const t = translations[lang]; // ✅ тепер працює
-
-        document.querySelector('[data-i18n="about"]').textContent = t.about;
-        document.querySelector('[data-i18n="skills"]').textContent = t.skills;
-        document.querySelector('[data-i18n="experience"]').textContent = t.experience;
-        document.querySelector('[data-i18n="projects"]').textContent = t.projects;
-        document.querySelector('[data-i18n="services"]').textContent = t.services;
-        document.querySelector('[data-i18n="contact"]').textContent = t.contact;
-
-        document.querySelector('#about h2').textContent = t.aboutTitle;
-        document.querySelector('#skills h2').textContent = t.skillsTitle;
-        document.querySelector('#experience h2').textContent = t.experienceTitle;
-        document.querySelector('#projects h2').textContent = t.projectsTitle;
-        document.querySelector('#services h2').textContent = t.servicesTitle;
-        document.querySelector('#contact h2').textContent = t.contactTitle;
-
-        document.querySelector('.brand-name').textContent = t.brandName;
-
-        document.querySelector('[data-i18n="hero-description"]').textContent = t['hero-description'];
-  document.querySelector('[data-i18n="projects"]').textContent = t.projects;
-  document.querySelector('[data-i18n="contact"]').textContent = t.contact;
+        const t = translations[lang];
+        
+        // Автоматичний переклад всіх елементів з data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) {
+                el.textContent = t[key];
+            } else {
+                console.warn(`Translation missing for key: ${key} in language: ${lang}`);
+            }
+        });
+        
+        // Переклад заголовків секцій (якщо немає data-i18n)
+        const sections = {
+            'about': 'aboutTitle',
+            'skills': 'skillsTitle',
+            'experience': 'experienceTitle',
+            'projects': 'projectsTitle',
+            'services': 'servicesTitle',
+            'contact': 'contactTitle'
+        };
+        
+        Object.entries(sections).forEach(([id, key]) => {
+            const section = document.querySelector(`#${id} h2`);
+            if (section && !section.hasAttribute('data-i18n')) {
+                section.textContent = t[key];
+            }
+        });
+        
+        // Переклад brand name (якщо немає data-i18n)
+        const brandName = document.querySelector('.brand-name');
+        if (brandName && !brandName.hasAttribute('data-i18n')) {
+            brandName.textContent = t.brandName;
+        }
     }
 });
