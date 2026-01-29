@@ -36,7 +36,7 @@
     left: var(--padding-x);
     width: calc(100% - 2 * var(--padding-x));
     height: calc(100% - var(--padding-x));
-    background-image: url(../assets/img/hero-bg.png);
+    background-image: url(../../assets/img/hero-bg.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

@@ -1,16 +1,26 @@
 /* style.css */
+/* ================== CORE ================== */
 @import url("./reset.css");
 @import url("./variables.css");
 @import url("./base.css");
 @import url("./theme.css");
 
-@import url("./header.css");
-@import url("./nav.css");
+/* ================== UI ================== */
+@import url("./ui/section.css");
+@import url("./ui/card.css");
+@import url("./ui/grid.css");
+@import url("./ui/frame.css");
 
+/* ================== LAYOUT ================== */
+@import url("./layout/header.css");
+@import url("./layout/nav.css");
+@import url("./layout/main.css");
+
+/* ================== SECTIONS ================== */
+@import url("./sections/about.css");
+@import url("./sections/skills.css");
+@import url("./sections/values.css");
+@import url("./sections/experience.css");
+
+/* ================== RESPONSIVE ================== */
 @import url("./responsive.css");
-
-@import url("./main.css");
-@import url("./about.css");
-@import url("./values.css");
-@import url("./skills.css");
-@import url("./experience.css");
