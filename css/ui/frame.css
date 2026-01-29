@@ -1,0 +1,79 @@
+/* Базовый класс для рамок с фоном */
+.frame-base {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  /* SVG внутри */
+  border-radius: 32px;
+
+}
+.frame-base svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.frame-base path {
+  stroke: var(--color-border);
+  vector-effect: non-scaling-stroke;
+  transition: stroke var(--transition);
+}
+
+/* общий фон через ::before */
+.frame-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+   background-color: var(--color-bg); /* оставляем переменную */
+  background-image: url('../../assets/img/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  z-index: var(--frame-z, 2);
+  filter: grayscale(100%);
+  border-radius: 32px;
+}
+
+/* простой цветной слой через ::after */
+.frame-base::after {
+  content: '';
+  position: absolute;
+  top: 1px;    /* половина от 2px */
+  left: 2px;   /* половина от 2px */
+  width: calc(100% - 6px);
+  height: calc(100% - 4px);
+  background-color: var(--color-bg); /* заливка цветом */
+  z-index: -1; /* чтобы не закрыть SVG */
+  border-radius: 32px; /* совпадает с рамкой */
+}
+
+/* dark theme, только если отличается */
+[data-theme="dark"] .frame-base::before {
+  filter: grayscale(100%) invert(1);
+}
+
+/* уникальные отличия main-header */
+#main-header .frame-base {
+  --frame-z: 2;
+  --frame-top: 0;
+  --frame-left: 0;
+  --frame-width-offset: 0;
+  --frame-height-offset: 0;
+}
+
+/* уникальные отличия header */
+.header .frame-base {
+  --frame-z: 4;
+  --frame-top: var(--padding-x);
+  --frame-left: var(--padding-x);
+  --frame-width-offset: calc(2 * var(--padding-x));
+  --frame-height-offset: var(--padding-x);
+}
