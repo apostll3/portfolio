@@ -20,10 +20,10 @@
 
 .skills-intro {
   font-size: 1.0625rem;
-  line-height: 1.7;
+  line-height: 1.2;
   color: var(--color-text);
   opacity: 0.85;
-  margin-bottom: 48px;
+  margin-bottom: var(--padding-x);
   max-width: 800px;
 }
 
