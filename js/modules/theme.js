@@ -21,6 +21,7 @@ export class ThemeManager {
       return;
     }
 
+    this.iconEl = this.themeToggle.querySelector('[data-control="theme-icon"]');
     this.applyTheme(this.currentTheme);
     this.updateToggleIcon(this.currentTheme);
     this.attachEventListeners();
@@ -76,10 +77,8 @@ export class ThemeManager {
    * @param {'light' | 'dark'} theme
    */
   updateToggleIcon(theme) {
-    if (!this.themeToggle) return;
-
-    this.themeToggle.innerHTML =
-      theme === 'dark' ? this.getMoonIcon() : this.getSunIcon();
+    if (!this.iconEl) return;
+    this.iconEl.innerHTML = theme === 'dark' ? this.getMoonIcon() : this.getSunIcon();
   }
 
   /**

@@ -24,6 +24,7 @@ export class I18nManager {
       return;
     }
 
+    this.langTextEl = this.langToggle.querySelector('[data-control="lang-text"]');
     this.applyLanguage(this.currentLang);
     this.updateToggleButton(this.currentLang);
     this.attachEventListeners();
@@ -99,10 +100,11 @@ export class I18nManager {
    * Translate brand name
    */
   translateBrandName(t) {
-    const brand = document.querySelector('[data-brand-name]');
-    if (brand && t.brandName) {
+    const brands = document.querySelectorAll('[data-brand-name]');
+    if (!brands.length || !t.brandName) return;
+    brands.forEach(brand => {
       brand.textContent = t.brandName;
-    }
+    });
   }
 
   /**
@@ -110,10 +112,9 @@ export class I18nManager {
    */
   updateToggleButton(lang) {
     const label = lang === 'uk' ? 'UA' : 'EN';
-    this.langToggle.innerHTML = `
-      ${this.getLanguageIcon()}
-      <span class="lang-text">${label}</span>
-    `;
+    if (this.langTextEl) {
+      this.langTextEl.textContent = label;
+    }
   }
 
   /**

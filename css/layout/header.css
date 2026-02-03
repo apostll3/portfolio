@@ -43,6 +43,11 @@
   color: inherit;
 }
 
+/* MOBILE MENU TOGGLE */
+.menu-toggle {
+  cursor: pointer;
+}
+
 .brand-photo {
   position: relative;
   width: 70px;
