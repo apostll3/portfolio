@@ -8,15 +8,7 @@
   margin: 0 auto;
 }
 
-.experience-title {
-  font-family: 'Caveat', cursive;
-  font-weight: 800;
-  font-size: 42px;
-  line-height: 1.2;
-  margin-bottom: var(--padding-x);
-  text-align: left;
-  color: var(--color-text);
-}
+/* title styles moved to .section-title */
 
 .experience-timeline {
   position: relative;
@@ -220,9 +212,7 @@
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
-  .experience-title {
-    font-size: 2.25rem;
-  }
+  /* title styles moved to .section-title */
   
   .experience-item {
     margin-bottom: 40px;
@@ -230,10 +220,7 @@
 }
 
 @media (max-width: 768px) {
-  .experience-title {
-    font-size: 2rem;
-    margin-bottom: 36px;
-  }
+  /* title styles moved to .section-title */
   
   .experience-timeline {
     padding-left: 0;
@@ -271,10 +258,7 @@
 }
 
 @media (max-width: 480px) {
-  .experience-title {
-    font-size: 1.75rem;
-    margin-bottom: 28px;
-  }
+  /* title styles moved to .section-title */
   
   .experience-item {
     padding: 20px;

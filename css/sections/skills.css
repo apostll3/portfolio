@@ -8,15 +8,7 @@
   margin: 0 auto;
 }
 
-.skills-title {
-  font-family: 'Caveat', cursive;
-  font-weight: 800;
-  font-size: 42px;
-  line-height: 1.2;
-  margin-bottom: var(--padding-x);
-  text-align: left;
-  color: var(--color-text);
-}
+/* title styles moved to .section-title */
 
 .skills-intro {
   font-size: 1.0625rem;
@@ -118,9 +110,7 @@
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
-  .skills-title {
-    font-size: 2.25rem;
-  }
+  /* title styles moved to .section-title */
   
   .skills-grid {
     gap: 20px;
@@ -128,10 +118,7 @@
 }
 
 @media (max-width: 768px) {
-  .skills-title {
-    font-size: 2rem;
-    margin-bottom: 36px;
-  }
+  /* title styles moved to .section-title */
   
   .skills-intro {
     font-size: 1rem;
@@ -153,10 +140,7 @@
 }
 
 @media (max-width: 480px) {
-  .skills-title {
-    font-size: 1.75rem;
-    margin-bottom: 28px;
-  }
+  /* title styles moved to .section-title */
   
   .skill-category {
     padding: 20px;

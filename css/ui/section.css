@@ -1,0 +1,60 @@
+/* ================= SECTION TITLE ================= */
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Caveat', cursive;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: var(--padding-x);
+  text-align: left;
+  color: var(--color-text);
+}
+
+.section-title-icon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-title-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+}
+
+.section-title-icon svg [fill]:not([fill="none"]) {
+  fill: currentColor;
+}
+
+.section-title-icon svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor;
+}
+
+.section-title-text {
+  display: inline-block;
+}
+
+@media (max-width: 1024px) {
+  .section-title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.75rem;
+    margin-bottom: 28px;
+  }
+}

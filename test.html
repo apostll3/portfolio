@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Structure Example</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Великі блоки-групи */
+    .mega-section {
+      margin-bottom: 60px;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 3px solid #e0e0e0;
+    }
+
+    .mega-section-title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #1a1a1a;
+      border-bottom: 3px solid #333;
+      padding-bottom: 10px;
+    }
+
+    .mega-section-title .emoji {
+      margin-right: 10px;
+    }
+
+    /* Підсекції всередині */
+    .sub-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border-left: 4px solid #666;
+    }
+
+    .sub-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .sub-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .sub-section p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    /* Hero окремо */
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 16px;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Для наочності */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .card h4 {
+      margin-bottom: 8px;
+      color: #444;
+    }
+
+    .highlight {
+      background: #fff9e6;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- HERO (окремо) -->
+    <div class="hero">
+      <h1>Dmitriy Apostle</h1>
+      <p>Web Developer & Content Creator</p>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- МЕГА-БЛОК 1: ПРОФІЛЬ (Хто я)             -->
+    <!-- ========================================= -->
+    <div class="mega-section">
+      <h2 class="mega-section-title">
+        <span class="emoji">🧑</span>
+        ПРОФІЛЬ — Хто я
+      </h2>
+
+      <!-- Підсекція: About -->
+      <div class="sub-section">
+        <h3>💼 Про мене</h3>
+        <p>Я full-stack веб-розробник з комерційним досвідом...</p>
+        <p><span class="highlight">3+ роки</span> | <span class="highlight">15+ проєктів</span> | <span class="highlight">100% віддалено</span></p>
+      </div>
+
+      <!-- Підсекція: Journey -->
+      <div class="sub-section">
+        <h3>🛤️ Шлях</h3>
+        <p>Почав з junior frontend, працював з React/TypeScript...</p>
+      </div>
+
+      <!-- Підсекція: Approach -->
+      <div class="sub-section">
+        <h3>⚙️ Підхід</h3>
+        <p>Створюю веб-застосунки самостійно, ціную чисту архітектуру...</p>
+      </div>
+
+      <!-- Підсекція: Communication -->
+      <div class="sub-section">
+        <h3>💬 Комунікація</h3>
+        <p>Маю досвід координації задач і комунікації зі стейкхолдерами...</p>
+      </div>
+
+      <!-- Підсекція: Values (ІНТЕГРОВАНО СЮДИ!) -->
+      <div class="sub-section">
+        <h3>⭐ Мої цінності</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Чесність</h4>
+            <p>Прозорість у комунікації, реалістичні оцінки...</p>
+          </div>
+          <div class="card">
+            <h4>Відповідальність</h4>
+            <p>Беру на себе результат, а не лише процес...</p>
+          </div>
+          <div class="card">
+            <h4>Здорові межі</h4>
+            <p>Вмію сказати "ні", коли це потрібно...</p>
+          </div>
+          <div class="card">
+            <h4>Баланс</h4>
+            <p>Шукаю те, що працює стабільно і має сенс...</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- МЕГА-БЛОК 2: ЕКСПЕРТИЗА (Що я вмію)      -->
+    <!-- ========================================= -->
+    <div class="mega-section">
+      <h2 class="mega-section-title">
+        <span class="emoji">💼</span>
+        ЕКСПЕРТИЗА — Що я вмію і зробив
+      </h2>
+
+      <!-- Підсекція: Skills -->
+      <div class="sub-section">
+        <h3>🛠️ Навички</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Frontend</h4>
+            <p>React, TypeScript, HTML/CSS, Tailwind...</p>
+          </div>
+          <div class="card">
+            <h4>Backend</h4>
+            <p>C# / .NET, ASP.NET Core, SQL...</p>
+          </div>
+          <div class="card">
+            <h4>Tools</h4>
+            <p>Git, VS Code, Docker, npm...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Підсекція: Experience -->
+      <div class="sub-section">
+        <h3>📊 Досвід роботи</h3>
+        <div class="card" style="margin-bottom: 15px;">
+          <h4>Web Developer — Vilors (2024-2025)</h4>
+          <p>Завершив 8 проєктів, працював з WordPress, React, Python...</p>
+        </div>
+        <div class="card">
+          <h4>Frontend Developer — Commercial (2023)</h4>
+          <p>Розробляв UI з React/TypeScript, інтегрував з .NET...</p>
+        </div>
+      </div>
+
+      <!-- Підсекція: Projects -->
+      <div class="sub-section">
+        <h3>🚀 Проєкти</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Проєкт 1</h4>
+            <p>E-commerce сайт на React...</p>
+          </div>
+          <div class="card">
+            <h4>Проєкт 2</h4>
+            <p>WordPress тема для блогу...</p>
+          </div>
+          <div class="card">
+            <h4>Проєкт 3</h4>
+            <p>Dashboard з інтеграцією API...</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- МЕГА-БЛОК 3: РОБОТА РАЗОМ                -->
+    <!-- ========================================= -->
+    <div class="mega-section">
+      <h2 class="mega-section-title">
+        <span class="emoji">🤝</span>
+        РОБОТА РАЗОМ — Як зі мною співпрацювати
+      </h2>
+
+      <!-- Підсекція: Services -->
+      <div class="sub-section">
+        <h3>📦 Послуги</h3>
+        <div class="grid">
+          <div class="card">
+            <h4>Frontend розробка</h4>
+            <p>Створення сучасних інтерфейсів...</p>
+          </div>
+          <div class="card">
+            <h4>Full-stack проєкти</h4>
+            <p>Повний цикл від ідеї до деплою...</p>
+          </div>
+          <div class="card">
+            <h4>Підтримка сайтів</h4>
+            <p>Оновлення, фікси, оптимізація...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Підсекція: Contact -->
+      <div class="sub-section">
+        <h3>📬 Контакти</h3>
+        <p><strong>Email:</strong> example@email.com</p>
+        <p><strong>Telegram:</strong> @apostll3</p>
+        <p><strong>Instagram:</strong> @apostll3</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
