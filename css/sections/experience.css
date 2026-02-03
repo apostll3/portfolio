@@ -20,7 +20,7 @@
 
 .experience-timeline {
   position: relative;
-  padding-left: 40px;
+  padding-left: var(--padding-x);
 }
 
 /* Timeline line */
@@ -36,8 +36,8 @@
 
 .experience-item {
   position: relative;
-  margin-bottom: 48px;
-  padding: 32px;
+  margin-bottom: var(--padding-x);
+  padding: calc(var(--padding-x) * 1.5);
  
   background: var(--color-bg);
   transition: all var(--transition);
@@ -150,34 +150,13 @@
 /* Additional Experience Card */
 .experience-additional {
   padding: 32px;
-  border-radius: 24px;
-  border: 2px solid var(--color-border);
+ 
   background: var(--color-bg);
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
 }
 
-.experience-additional::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('../../assets/img/hero-bg.png');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.03;
-  z-index: 0;
-  filter: grayscale(100%);
-  border-radius: 24px;
-  pointer-events: none;
-}
-
-[data-theme="dark"] .experience-additional::before {
-  filter: grayscale(100%) invert(1);
-}
 
 .experience-additional:hover {
   transform: translateY(-4px);

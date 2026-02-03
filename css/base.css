@@ -6,6 +6,10 @@ body {
   line-height: 1.6;
   position: relative;
 }
+
+html {
+  scroll-padding-top: calc(var(--header-height) + 2 * var(--padding-x));
+}
 /* 
 body::before {
   content: '';
