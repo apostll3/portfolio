@@ -59,10 +59,7 @@
 }
 
 .menu-toggle {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: none;
+  display: none;
 }
 
 /* Control content over frame */
@@ -132,9 +129,7 @@
   }
 
   .menu-toggle {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+    display: flex;
     border: none;
   }
   

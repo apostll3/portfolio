@@ -30,6 +30,7 @@
   height: 100%;
   padding: 0 var(--padding-x);
   z-index: 5;
+  gap: var(--padding-x);
 }
 
 /* BRAND */
@@ -75,7 +76,7 @@
   font-family: 'Caveat', cursive;
   font-weight: 700;
   font-size: 2rem;
-
+  width: max-content;
 }
 
 /* SVG рамка */
@@ -138,10 +139,3 @@
     height: 50px;
   }
 }
-
-/* NAV */
-.nav {
-  display: flex;
-  gap: 18px;
-}
-
