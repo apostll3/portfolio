@@ -42,7 +42,10 @@ export class I18nManager {
    * Get stored language or default to Ukrainian
    */
   getStoredLanguage() {
-    return localStorage.getItem('lang') || 'ua';
+    const stored = localStorage.getItem('lang');
+    if (stored === 'ua') return 'uk';
+    if (stored === 'uk' || stored === 'en') return stored;
+    return 'uk';
   }
 
   /**
@@ -58,7 +61,7 @@ export class I18nManager {
    * Toggle between Ukrainian and English
    */
   toggle() {
-    const newLang = this.currentLang === 'ua' ? 'en' : 'ua';
+    const newLang = this.currentLang === 'uk' ? 'en' : 'uk';
     this.applyLanguage(newLang);
     this.updateToggleButton(newLang);
     localStorage.setItem('lang', newLang);
@@ -106,9 +109,10 @@ export class I18nManager {
    * Update language toggle button
    */
   updateToggleButton(lang) {
+    const label = lang === 'uk' ? 'UA' : 'EN';
     this.langToggle.innerHTML = `
       ${this.getLanguageIcon()}
-      <span class="lang-text">${lang.toUpperCase()}</span>
+      <span class="lang-text">${label}</span>
     `;
   }
 

@@ -1,5 +1,5 @@
 export const translations = {
-        ua: {
+        uk: {
             // Navigation
             about: 'Про мене',
             skills: 'Навички',

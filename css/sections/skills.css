@@ -35,26 +35,12 @@
 
 .skill-category {
   padding: 32px;
-  border-radius: 24px;
-  border: 2px solid var(--color-border);
   background: var(--color-bg);
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
 }
 
-.skill-category::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 30% 50%, rgba(0,0,0,0.02) 0%, transparent 70%);
-  opacity: 0.5;
-  z-index: 0;
-  pointer-events: none;
-}
 
 .skill-category:hover {
   transform: translateY(-4px);

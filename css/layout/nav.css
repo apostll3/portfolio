@@ -24,7 +24,7 @@
   transform: translateX(-50%) scaleX(0);
   transform-origin: center;
 
-  background-image: url('../assets/svg/underline.svg');
+  background-image: url('../../assets/svg/underline.svg');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
