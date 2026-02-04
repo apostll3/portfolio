@@ -16,8 +16,8 @@ export const translations = {
             
             // About Section
             aboutTitle: 'Про мене',
-            'about-intro': 'Я full-stack веб-розробник з комерційним досвідом роботи як у командному, так і в проєктному середовищі.',
-            'stat-years': 'роки досвіду',
+            'about-intro': 'Я full-stack веб-розробник з комерційним досвідом роботи як у командному, так і в проєктному середовищі.',            'stat-years': 'роки досвіду',
+           'about-intro-subtext': 'Я працюю системно, беру на себе відповідальність за результати та зосереджуюся на стабільних рішеннях.',
             'stat-projects': 'проєктів',
             'stat-remote': 'віддалено',
             
@@ -123,6 +123,7 @@ experienceTitle: 'Досвід',
             // About Section
             aboutTitle: 'About Me',
             'about-intro': 'I am a full-stack web developer with commercial experience working in both team and project-based environments.',
+            'about-intro-subtext': 'I work in a structured way, take ownership of results, and stay focused on stable solutions.',
             'stat-years': 'years of experience',
             'stat-projects': 'projects',
             'stat-remote': 'remote',
