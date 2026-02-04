@@ -5,7 +5,7 @@
  width="48.000000pt" height="48.000000pt" viewBox="0 0 48.000000 48.000000"
  preserveAspectRatio="xMidYMid meet">
 <g transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
+fill="currentColor" stroke="currentColor" stroke-width="10">
 <path d="M190 449 c-29 -12 -40 -27 -40 -56 0 -21 -5 -23 -53 -23 -53 0 -54
 -1 -70 -37 -20 -49 -30 -110 -18 -117 5 -3 12 -39 16 -80 10 -112 7 -110 182
 -114 91 -2 159 0 176 7 32 12 54 57 64 129 3 26 12 57 20 68 14 22 10 107 -7

@@ -12,9 +12,90 @@
   color: var(--color-text);
 }
 
+.section-title {
+  position: relative;
+  padding-right: 44px;
+}
+
+.section-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+}
+
+.section-toggle-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+}
+
+.section-toggle-frame::before,
+.section-toggle-frame::after {
+  content: none;
+}
+
+.section-toggle-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.section-toggle-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+}
+
+.section-toggle-icon svg [fill]:not([fill="none"]) {
+  fill: currentColor;
+}
+
+.section-toggle-icon svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor;
+}
+
+/* Arrow points down by default; rotate up when expanded */
+.section-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.section-collapsed .section-toggle-icon {
+  transform: rotate(0deg);
+}
+
+.section-content {
+  overflow: hidden;
+  max-height: 2000px;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+  opacity: 1;
+}
+
+.section-collapsed .section-content {
+  max-height: 0;
+  opacity: 0;
+}
+
 .section-title-icon {
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

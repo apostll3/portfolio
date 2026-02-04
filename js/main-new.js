@@ -34,6 +34,9 @@ class PortfolioApp {
 
       // Prevent flicker on responsive resize
       this.initResizeGuard();
+
+      // Initialize section collapses
+      this.initSectionToggles();
       
       console.log('Portfolio app initialized successfully');
     } catch (error) {
@@ -100,6 +103,50 @@ class PortfolioApp {
       resizeTimer = window.setTimeout(() => {
         document.body.classList.remove('no-transition');
       }, 120);
+    });
+  }
+
+  /**
+   * Collapsible sections (keep title, toggle content)
+   */
+  initSectionToggles() {
+    document.querySelectorAll('section .section-title .section-toggle').forEach(button => {
+      const section = button.closest('section');
+      const title = button.closest('.section-title');
+      const contentId = button.getAttribute('aria-controls');
+      const content = contentId ? document.getElementById(contentId) : null;
+      if (!section || !content) return;
+
+      const setState = collapsed => {
+        section.classList.toggle('section-collapsed', collapsed);
+        button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        if (!collapsed) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        } else {
+          content.style.maxHeight = '0px';
+        }
+      };
+
+      setState(false);
+
+      button.addEventListener('click', () => {
+        const isCollapsed = section.classList.contains('section-collapsed');
+        setState(!isCollapsed);
+      });
+
+      if (title) {
+        title.addEventListener('click', event => {
+          if (event.target.closest('.section-toggle')) return;
+          const isCollapsed = section.classList.contains('section-collapsed');
+          setState(!isCollapsed);
+        });
+      }
+
+      window.addEventListener('resize', () => {
+        if (!section.classList.contains('section-collapsed')) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+      });
     });
   }
 }
