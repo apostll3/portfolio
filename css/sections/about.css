@@ -198,9 +198,7 @@
 }
 
 @media (max-width: 768px) {
-  #about {
-    padding: 60px 0;
-  }
+  
   
   /* title styles moved to .section-title */
   
@@ -232,9 +230,7 @@
 }
 
 @media (max-width: 480px) {
-  #about {
-    padding: 48px 0;
-  }
+ 
   
   /* title styles moved to .section-title */
   

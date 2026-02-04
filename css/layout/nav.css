@@ -1,8 +1,9 @@
 /* ================= NAV ================= */
 .nav {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .nav-panel {
