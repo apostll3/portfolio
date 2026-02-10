@@ -44,6 +44,12 @@ class PortfolioApp {
       // Initialize custom scrollbar (scene window)
       this.initCustomScrollbar();
 
+      // Prevent scroll chaining between scene window and page
+      this.initScrollGuard();
+
+      // Section lock between main-header and scene-window
+      this.initSectionLock();
+
       // Initialize scrollbar theme swap
       this.initScrollbarTheme();
 
@@ -488,6 +494,146 @@ class PortfolioApp {
     document.addEventListener('pointerup', stopDrag);
 
     requestUpdate();
+  }
+
+  /**
+   * Prevent scroll chaining between scene window and page scroll
+   */
+  initScrollGuard() {
+    const content = document.querySelector('.scene-window-content');
+    if (!content) return;
+
+    const onWheel = event => {
+      if (event.deltaY === 0) return;
+      const atTop = content.scrollTop <= 0;
+      const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 1;
+      const scrollingDown = event.deltaY > 0;
+      const canScroll = (scrollingDown && !atBottom) || (!scrollingDown && !atTop);
+
+      if (!canScroll) return;
+      event.preventDefault();
+      content.scrollTop += event.deltaY;
+    };
+
+    content.addEventListener('wheel', onWheel, { passive: false });
+  }
+
+  /**
+   * Hard section lock between #main-header and #scene-window
+   */
+  initSectionLock() {
+    const sections = [
+      document.getElementById('main-header'),
+      document.getElementById('scene-window')
+    ].filter(Boolean);
+    if (sections.length < 2) return;
+
+    const getOffsets = () => {
+      const header = document.querySelector('.header');
+      const headerHeight = header ? header.getBoundingClientRect().height || 0 : 0;
+      const paddingX = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--padding-x')) || 0;
+      return { headerHeight, paddingX };
+    };
+
+    const getPositions = () => {
+      const { headerHeight, paddingX } = getOffsets();
+      const targetOffset = Math.max(headerHeight - (paddingX - paddingX * 2), 0);
+      return sections.map(section => Math.max(section.offsetTop - targetOffset, 0));
+    };
+
+    const getClosestIndex = () => {
+      const positions = getPositions();
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      let best = 0;
+      let bestDist = Infinity;
+      positions.forEach((pos, idx) => {
+        const dist = Math.abs(scrollTop - pos);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = idx;
+        }
+      });
+      return best;
+    };
+
+    let isAnimating = false;
+    let scrollTimer = null;
+
+    const scrollToIndex = index => {
+      const positions = getPositions();
+      const nextIndex = Math.max(0, Math.min(index, positions.length - 1));
+      const targetTop = positions[nextIndex];
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      if (Math.abs(scrollTop - targetTop) < 2) return;
+      isAnimating = true;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      window.setTimeout(() => {
+        isAnimating = false;
+      }, 500);
+    };
+
+    const shouldIgnore = (event, deltaY) => {
+      if (event?.defaultPrevented) return true;
+      const content = event?.target?.closest?.('.scene-window-content');
+      if (!content) return false;
+      const atTop = content.scrollTop <= 0;
+      const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 1;
+      const scrollingDown = deltaY > 0;
+      if ((scrollingDown && !atBottom) || (!scrollingDown && !atTop)) {
+        return true;
+      }
+      return false;
+    };
+
+    const onWheel = event => {
+      if (isAnimating) {
+        event.preventDefault();
+        return;
+      }
+      const deltaY = event.deltaY || 0;
+      if (deltaY === 0) return;
+      if (shouldIgnore(event, deltaY)) return;
+      event.preventDefault();
+      const direction = deltaY > 0 ? 1 : -1;
+      const index = getClosestIndex();
+      scrollToIndex(index + direction);
+    };
+
+    const onScroll = () => {
+      if (isAnimating) return;
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(() => {
+        if (isAnimating) return;
+        const index = getClosestIndex();
+        scrollToIndex(index);
+      }, 120);
+    };
+
+    let touchStartY = 0;
+    let touchTarget = null;
+
+    const onTouchStart = event => {
+      if (event.touches.length !== 1) return;
+      touchStartY = event.touches[0].clientY;
+      touchTarget = event.target;
+    };
+
+    const onTouchEnd = event => {
+      if (!touchTarget) return;
+      const endY = event.changedTouches[0].clientY;
+      const deltaY = touchStartY - endY;
+      if (Math.abs(deltaY) < 24) return;
+      const fakeEvent = { target: touchTarget, defaultPrevented: false };
+      if (shouldIgnore(fakeEvent, deltaY)) return;
+      const direction = deltaY > 0 ? 1 : -1;
+      const index = getClosestIndex();
+      scrollToIndex(index + direction);
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
   }
 
   /**

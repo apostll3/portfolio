@@ -1,13 +1,15 @@
 .main {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--padding-x);
+  padding: var(--padding-x);
   padding-top: calc(var(--header-height) + 2 * var(--padding-x));
  
   display: flex;
   flex-direction: column;
   gap: var(--padding-x);
 }
+
+
 
 @media (max-width: 1740px) {
   .main {
@@ -26,13 +28,19 @@ section {
 /* ================= MAIN HEADER ================= */
 #main-header {
   position: relative;
-  min-height: calc(100vh - var(--header-height) - 3 * var(--padding-x));
+  min-height: calc(100vh - var(--header-height) - 2 * var(--padding-x));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 
 }
+
+#main-header,
+#scene-window {
+  scroll-margin-top: calc(var(--header-height) + var(--padding-x));
+}
+
 
 
 .hero-content {
