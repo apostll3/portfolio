@@ -3,10 +3,18 @@
   margin: 0 auto;
   padding: 0 var(--padding-x);
   padding-top: calc(var(--header-height) + 2 * var(--padding-x));
+ 
   display: flex;
   flex-direction: column;
   gap: var(--padding-x);
 }
+
+@media (max-width: 1740px) {
+  .main {
+     padding-right: calc(var(--padding-x) * 1.5);
+  }
+}
+
 
 section {
   /* min-height: 100vh;

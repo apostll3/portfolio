@@ -1,0 +1,431 @@
+/* ================= SCENE WINDOW ================= */
+:root {
+  --scrollbar-button-size: 10px;
+  --custom-scrollbar-width: 12px;
+  --custom-scrollbar-gap: 10px;
+  --page-scrollbar-right: clamp(
+    var(--padding-x),
+    calc((100vw - var(--max-width)) / 2 + var(--padding-x)),
+    50vw
+  );
+}
+.scene-window {
+  position: relative;
+  margin: var(--padding-x) auto;
+  max-width: var(--max-width);
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--color-bg);
+  width: 100%;
+  min-height: calc(100vh - var(--header-height) - 3 * var(--padding-x));
+  --scene-content-padding: 32px;
+  --custom-scrollbar-width: 16px;
+  --custom-scrollbar-gap: 10px;
+}
+
+.scene-window > .frame-base {
+  z-index: 0;
+}
+
+.scene-window-content {
+  position: relative;
+  z-index: 1;
+  padding: var(--scene-content-padding);
+  max-height: calc(100vh - var(--header-height) - 3 * var(--padding-x));
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
+  color: var(--color-text);
+}
+
+.scene-window.custom-scrollbar-ready .scene-window-content {
+  padding-right: calc(var(--scene-content-padding) + var(--custom-scrollbar-width) + var(--custom-scrollbar-gap));
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scene-window.custom-scrollbar-ready .scene-window-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.scene-scrollbar {
+  position: absolute;
+  top: var(--scene-content-padding);
+  bottom: var(--scene-content-padding);
+  right: var(--custom-scrollbar-gap);
+  width: var(--custom-scrollbar-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.scene-window.custom-scrollbar-ready .scene-scrollbar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scene-scrollbar.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scene-scrollbar-btn {
+  width: var(--scrollbar-button-size);
+  height: var(--scrollbar-button-size);
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  cursor: pointer;
+}
+
+.scene-scrollbar-btn--up {
+  background-image: var(--scrollbar-arrow-up, url('../../assets/svg/scrollbar/arrow-up.svg'));
+}
+
+.scene-scrollbar-btn--down {
+  background-image: var(--scrollbar-arrow-down, url('../../assets/svg/scrollbar/arrow-down.svg'));
+}
+
+.scene-scrollbar-track {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  background-image: var(--scrollbar-track, url('../../assets/svg/scrollbar/track.svg'));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  cursor: pointer;
+}
+
+.scene-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-image: var(--scrollbar-thumb, url('../../assets/svg/scrollbar/thumb.svg'));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.scene-scrollbar-thumb.is-dragging {
+  cursor: grabbing;
+}
+
+html.custom-page-scrollbar,
+body.custom-page-scrollbar {
+  scrollbar-width: none;
+}
+
+html.custom-page-scrollbar::-webkit-scrollbar,
+body.custom-page-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.page-scrollbar {
+  position: fixed;
+  top: var(--padding-x);
+  bottom: var(--padding-x);
+  right: 0;
+  display: grid;
+  grid-template-columns: var(--custom-scrollbar-width) var(--custom-scrollbar-width);
+  column-gap: 0;
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.custom-page-scrollbar .page-scrollbar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.page-scrollbar.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-scrollbar-left {
+  position: relative;
+  width: var(--custom-scrollbar-width);
+  height: 100%;
+}
+
+.page-scrollbar-btn {
+  width: var(--scrollbar-button-size);
+  height: var(--scrollbar-button-size);
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  cursor: pointer;
+}
+
+.page-scrollbar-btn--up {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: var(--scrollbar-arrow-up, url('../../assets/svg/scrollbar/arrow-up.svg'));
+}
+
+.page-scrollbar-btn--down {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-image: var(--scrollbar-arrow-down, url('../../assets/svg/scrollbar/arrow-down.svg'));
+}
+
+.page-scrollbar-track {
+  position: relative;
+  width: var(--custom-scrollbar-width);
+  height: 100%;
+  background-image: var(--scrollbar-track, url('../../assets/svg/scrollbar/track.svg'));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  cursor: pointer;
+}
+
+.page-scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-image: var(--scrollbar-thumb, url('../../assets/svg/scrollbar/thumb.svg'));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.page-scrollbar-thumb.is-dragging {
+  cursor: grabbing;
+}
+
+@media (max-width: 1740px) {
+  .page-scrollbar {
+    top: calc(var(--header-height) + var(--padding-x)) !important;
+    right:0;
+  }
+}
+
+.scene-controls {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  margin: 0 auto;
+  margin-bottom: 24px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.scene-controls .frame-base {
+  z-index: 0;
+}
+
+.scene-controls-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.scene-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 18px;
+}
+
+.scene-tab {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 6px 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.scene-tab-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene-tab-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+}
+
+.scene-tab-icon svg [fill]:not([fill="none"]) {
+  fill: currentColor;
+}
+
+.scene-tab-icon svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor;
+}
+
+.scene-tab::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 100%;
+  height: 10px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  background-image: url('../../assets/svg/underline.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.scene-tab:hover::after,
+.scene-tab.is-active::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+.scene-tab.is-active {
+  font-weight: 700;
+}
+
+.scene-nav {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene-nav-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+}
+
+.scene-nav-frame::before,
+.scene-nav-frame::after {
+  content: none;
+}
+
+.scene-nav-icon {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  z-index: 1;
+  color: var(--color-text);
+  transition: transform var(--transition);
+}
+
+.scene-nav-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+}
+
+.scene-prev .scene-nav-icon {
+  transform: rotate(90deg);
+}
+
+.scene-next .scene-nav-icon {
+  transform: rotate(-90deg);
+}
+
+.scene {
+  display: none !important;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.scene.scene-active {
+  display: block !important;
+  opacity: 1;
+  transform: translateY(0);
+  animation: sceneIn 0.25s ease;
+}
+
+.scene.scene-exit {
+  display: block !important;
+  animation: sceneOut 0.2s ease;
+}
+
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sceneOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 768px) {
+  .scene-window {
+    --scene-content-padding: 24px;
+  }
+
+  .scene-tabs {
+    gap: 10px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scene-controls {
+    gap: 10px;
+  }
+
+  .scene-tab::after {
+    height: 6px;
+  }
+}

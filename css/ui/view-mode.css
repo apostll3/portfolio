@@ -1,0 +1,100 @@
+/* ================= VIEW MODE ================= */
+.view-mode {
+  margin: var(--padding-x) auto;
+}
+
+.view-mode-container {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 32px;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.view-mode-container .frame-base {
+  z-index: 0;
+}
+
+.view-mode-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.view-mode-label {
+  font-family: 'Caveat', cursive;
+  font-weight: 800;
+  font-size: 1.75rem;
+  color: var(--color-text);
+}
+
+.view-mode-tabs {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.view-mode-tab {
+  position: relative;
+  border: 2px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 10px 18px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.view-mode-tab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.view-mode-tab.is-active {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.view-mode-tab:focus-visible {
+  outline: 2px solid var(--color-border);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .view-mode-container {
+    padding: 20px;
+  }
+
+  .view-mode-content {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .view-mode-label {
+    font-size: 1.5rem;
+  }
+
+  .view-mode-tab {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Hide sections based on mode */
+body[data-view-mode="employer"] [data-view]:not([data-view~="employer"]) {
+  display: none;
+}
+
+body[data-view-mode="person"] [data-view]:not([data-view~="person"]) {
+  display: none;
+}

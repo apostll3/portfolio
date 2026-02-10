@@ -104,6 +104,13 @@
               <span class="control-icon" data-control="theme-icon"></span>
             </span>
           </button>
+          <button id="view-toggle" class="view-toggle" aria-label="Toggle view mode" aria-pressed="false">
+            <div class="frame-base control-frame" data-svg="assets/svg/32_frame.svg"></div>
+            <span class="control-content">
+              <span class="control-icon" data-svg="assets/svg/icon/share-circles--Streamline-Freehand.svg"></span>
+              <span class="view-text" data-view-label>HR</span>
+            </span>
+          </button>
           <button id="lang-toggle" class="lang-toggle" aria-label="Toggle language">
             <div class="frame-base control-frame" data-svg="assets/svg/32_frame.svg"></div>
             <span class="control-content">
@@ -120,7 +127,24 @@
   <!-- ================= MAIN ================= -->
   <main class="main">
 
-    <section id="main-header">
+    <section id="view-mode" class="view-mode" data-view="employer person">
+      <div class="view-mode-container">
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="view-mode-content">
+          <div class="view-mode-label">Режим перегляду</div>
+          <div class="view-mode-tabs" role="tablist" aria-label="Режим перегляду">
+            <button class="view-mode-tab is-active" type="button" data-view-mode="employer" role="tab" aria-selected="true">
+              Для роботодавця
+            </button>
+            <button class="view-mode-tab" type="button" data-view-mode="person" role="tab" aria-selected="false">
+              Для людини
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="main-header" data-view="employer person">
 
      <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
 
@@ -132,7 +156,9 @@
         <div class="hero-text">
           <h1 class="hero-name">Dmitriy Apostle</h1>
           <p class="hero-title">Web / Full-stack Developer & Content Creator</p>
-          <p class="hero-description" data-i18n="hero-description">
+          <p class="hero-description" data-i18n="hero-description"
+            data-view-text-employer="Фокус на результатах, досвіді та стабільних рішеннях у продакшені. Готовий швидко включатися і закривати задачі."
+            data-view-text-person="Люблю поєднувати код і сенс, робити речі чесно та з повагою до людей і процесу.">
             Поєдную код, дизайн і розуміння людей у рішення, що реально працюють.
             Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.
           </p>
@@ -144,7 +170,25 @@
       </div>
     </section>
 
- <section id="about">
+   <div id="scene-window" class="scene-window">
+    <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+   <div class="scene-window-content">
+      <div class="scene-controls" data-scene-controls>
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="scene-controls-content">
+          <button class="scene-nav scene-prev" type="button" data-scene-prev aria-label="Previous section">
+            <div class="frame-base scene-nav-frame" data-svg="assets/svg/32_frame.svg"></div>
+            <span class="scene-nav-icon" data-svg="assets/svg/icon/section-arrow.svg" aria-hidden="true"></span>
+          </button>
+          <div class="scene-tabs" role="tablist" aria-label="Scenes"></div>
+          <button class="scene-nav scene-next" type="button" data-scene-next aria-label="Next section">
+            <div class="frame-base scene-nav-frame" data-svg="assets/svg/32_frame.svg"></div>
+            <span class="scene-nav-icon" data-svg="assets/svg/icon/section-arrow.svg" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="scene-container">
+<section id="about" class="scene scene-active" data-view="person">
       <div class="about-container">
         <h2 class="section-title">
           <span class="section-title-icon" data-svg="assets/svg/icon/messages-people-person.svg"></span>
@@ -165,10 +209,14 @@
             <div class="avatar-frame" data-svg="assets/svg/avatar-frame.svg"></div>
           </div>
           <div class="about-intro-content">
-            <p class="about-intro-text" data-i18n="about-intro">
+            <p class="about-intro-text" data-i18n="about-intro"
+              data-view-text-employer="Full-stack розробник, який бере відповідальність за результат і структурує роботу під бізнес-цілі."
+              data-view-text-person="Я люблю будувати зручні продукти й ціную людяний підхід у роботі.">
               ? full-stack ???-????????? ? ??????????? ????????, ???? ??????? ???, ?????? ? ?????? ????????.
             </p>
-            <p class="about-intro-subtext" data-i18n="about-intro-subtext">
+            <p class="about-intro-subtext" data-i18n="about-intro-subtext"
+              data-view-text-employer="Працюю системно, документую рішення, беру власність за якість і терміни."
+              data-view-text-person="Для мене важливі чесність, спокійна комунікація та сенс у задачах.">
               ?????? ??????????, ???? ???????????????? ?? ????????? ? ?????? ????? ?? ?????????? ????????.
             </p>
             <div class="about-intro-stats">
@@ -254,7 +302,7 @@
 
     <!-- Додай цю секцію після #about і перед #skills -->
 
-<section id="values">
+<section id="values" class="scene" data-view="person">
   <div class="values-container">
     <h2 class="section-title">
       <span class="section-title-icon" data-svg="assets/svg/icon/settings-cog--Streamline-Freehand.svg"></span>
@@ -363,11 +411,16 @@
         </p>
       </div>
     </div>
+    <div class="scene-scrollbar" data-scene-scrollbar aria-hidden="true">
+      <button class="scene-scrollbar-btn scene-scrollbar-btn--up" type="button" data-scrollbar-up aria-label="Scroll up"></button>
+      <div class="scene-scrollbar-track" data-scrollbar-track>
+        <div class="scene-scrollbar-thumb" data-scrollbar-thumb></div>
+      </div>
+      <button class="scene-scrollbar-btn scene-scrollbar-btn--down" type="button" data-scrollbar-down aria-label="Scroll down"></button>
+    </div>
   </div>
 </section>
-        </div>
-
-<section id="skills">
+<section id="skills" class="scene" data-view="employer person">
   <div class="skills-container">
     <h2 class="section-title">
       <span class="section-title-icon" data-svg="assets/svg/icon/Programming-Code-Laptop-Browser-Streamline-Freehand.svg"></span>
@@ -380,14 +433,16 @@
         </h2>
         <div class="section-content" id="skills-content">
     
-    <p class="skills-intro" data-i18n="skills-intro">
+    <p class="skills-intro" data-i18n="skills-intro"
+      data-view-text-employer="Зосереджуюсь на надійних технологіях і чистій архітектурі для продакшену."
+      data-view-text-person="Мені цікаво вчитися, але без гонитви — ціную баланс і стійкість.">
       I work across the full stack with a focus on frontend development. My approach prioritizes maintainable code, clear architecture, and solutions that remain stable over time. I use what works reliably in production environments.
     </p>
 
     <div class="skills-grid">
       
       <!-- Frontend -->
-      <div class="skill-category">
+      <div class="skill-category" data-view="employer">
         <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
         <div class="skill-category-header">
           <h3 class="skill-category-title">
@@ -415,7 +470,7 @@
       </div>
 
       <!-- Backend -->
-      <div class="skill-category">
+      <div class="skill-category" data-view="employer">
         <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
         <div class="skill-category-header">
           <h3 class="skill-category-title">
@@ -443,7 +498,7 @@
       </div>
 
       <!-- Languages & Fundamentals -->
-      <div class="skill-category">
+      <div class="skill-category" data-view="employer">
         <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
         <div class="skill-category-header">
           <h3 class="skill-category-title">
@@ -471,7 +526,7 @@
       </div>
 
       <!-- Tools & Workflow -->
-      <div class="skill-category">
+      <div class="skill-category" data-view="employer">
         <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
         <div class="skill-category-header">
           <h3 class="skill-category-title">
@@ -498,7 +553,7 @@
       </div>
 
       <!-- Architecture & Practices -->
-      <div class="skill-category full-width">
+      <div class="skill-category full-width" data-view="employer">
         <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
         <div class="skill-category-header">
           <h3 class="skill-category-title">
@@ -528,13 +583,111 @@
         </div>
       </div>
 
-    </div>
+      <!-- Person mode: compact programming -->
+      <div class="skill-category" data-view="person">
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="skill-category-header">
+          <h3 class="skill-category-title">
+            <span class="skill-category-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </span>
+            <span>Програмування (коротко)</span>
+          </h3>
+          <p class="skill-category-description">
+            Основні речі, з якими працюю щодня.
+          </p>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">Frontend</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">.NET</span>
+        </div>
+      </div>
+
+      <!-- Person mode: human skills -->
+      <div class="skill-category" data-view="person">
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="skill-category-header">
+          <h3 class="skill-category-title">
+            <span class="skill-category-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M4 12h16"></path>
+                <path d="M4 6h10"></path>
+                <path d="M4 18h12"></path>
+              </svg>
+            </span>
+            <span>Візуальна обробка (Photoshop)</span>
+          </h3>
+          <p class="skill-category-description">
+            Графіка, ретуш та підготовка візуалів.
+          </p>
+        </div>
+      </div>
+
+      <div class="skill-category" data-view="person">
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="skill-category-header">
+          <h3 class="skill-category-title">
+            <span class="skill-category-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <rect x="3" y="5" width="18" height="14" rx="2" ry="2"></rect>
+                <path d="M8 3v2"></path>
+                <path d="M16 3v2"></path>
+              </svg>
+            </span>
+            <span>Відеомонтаж та постпродакшн</span>
+          </h3>
+          <p class="skill-category-description">
+            Монтаж, ритм, звук, титри й фінальні правки.
+          </p>
+        </div>
+      </div>
+
+      <div class="skill-category" data-view="person">
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="skill-category-header">
+          <h3 class="skill-category-title">
+            <span class="skill-category-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M21 12a9 9 0 1 1-9-9"></path>
+                <path d="M21 3v6h-6"></path>
+              </svg>
+            </span>
+            <span>Проєктний менеджмент</span>
+          </h3>
+          <p class="skill-category-description">
+            Планування задач, пріоритизація та контроль дедлайнів.
+          </p>
+        </div>
+      </div>
+
+      <div class="skill-category" data-view="person">
+        <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
+        <div class="skill-category-header">
+          <h3 class="skill-category-title">
+            <span class="skill-category-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </span>
+            <span>Командне лідерство та координація</span>
+          </h3>
+          <p class="skill-category-description">
+            Організація людей, синхронізація процесів і підтримка темпу.
+          </p>
+        </div>
+      </div>
   </div>
 </section>
-        </div>
-
-
-<section id="experience">
+<section id="experience" class="scene" data-view="employer">
   <div class="experience-container">
     <h2 class="section-title">
       <span class="section-title-icon" data-svg="assets/svg/icon/Products-Briefcase-Streamline-Freehand.svg"></span>
@@ -618,9 +771,7 @@
 
   </div>
 </section>
-        </div>
-
-    <section id="projects">
+<section id="projects" class="scene" data-view="employer">
       <h2 class="section-title">
         <span class="section-title-icon" data-svg="assets/svg/icon/folder-code-icon.svg"></span>
         <span class="section-title-text" data-i18n="projectsTitle">Projects</span>
@@ -632,9 +783,7 @@
         </h2>
         <div class="section-content" id="projects-content">
     </section>
-        </div>
-
-    <section id="services">
+<section id="services" class="scene" data-view="employer">
       <h2 class="section-title">
         <span class="section-title-icon" data-svg="assets/svg/icon/Business-Deal-Hands-shake-Streamline-Freehand.svg"></span>
         <span class="section-title-text" data-i18n="servicesTitle">Services</span>
@@ -646,9 +795,7 @@
         </h2>
         <div class="section-content" id="services-content">
     </section>
-        </div>
-
-    <section id="contact">
+<section id="contact" class="scene" data-view="employer person">
       <h2 class="section-title">
         <span class="section-title-icon" data-svg="assets/svg/icon/office-business-card--streamline-freehand.svg"></span>
         <span class="section-title-text" data-i18n="contactTitle">Contact</span>
@@ -660,9 +807,21 @@
         </h2>
         <div class="section-content" id="contact-content">
     </section>
+      </div>
+    </div>
+  </div>
+
         </div>
 
   </main>
+  <div class="page-scrollbar" data-page-scrollbar aria-hidden="true">
+    <div class="page-scrollbar-left">
+      <button class="page-scrollbar-btn page-scrollbar-btn--up" type="button" data-page-scrollbar-up aria-label="Scroll up"></button>
+      <div class="page-scrollbar-thumb" data-page-scrollbar-thumb></div>
+      <button class="page-scrollbar-btn page-scrollbar-btn--down" type="button" data-page-scrollbar-down aria-label="Scroll down"></button>
+    </div>
+    <div class="page-scrollbar-track" data-page-scrollbar-track></div>
+  </div>
 
   <!-- JS -->
   <script type="module" src="js/main-new.js"></script>

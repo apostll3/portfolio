@@ -10,6 +10,9 @@
 @import url("./ui/card.css");
 @import url("./ui/grid.css");
 @import url("./ui/frame.css");
+@import url("./ui/scenes.css");
+@import url("./ui/view-mode.css");
+@import url("./mode-selector.css");
 
 /* ================== LAYOUT ================== */
 @import url("./layout/header.css");
