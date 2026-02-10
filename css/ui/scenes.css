@@ -13,7 +13,7 @@
   position: relative;
   /* margin: var(--padding-x) auto; */
   max-width: var(--max-width);
-  border-radius: 32px;
+  /* border-radius: 32px; */
   overflow: hidden;
   background: var(--color-bg);
   width: 100%;
@@ -24,7 +24,12 @@
 }
 
 .scene-window > .frame-base {
-  z-index: 0;
+  z-index: 3;
+}
+
+.scene-window > .frame-base::before,
+.scene-window > .frame-base::after {
+  content: none;
 }
 
 .scene-window-content {
