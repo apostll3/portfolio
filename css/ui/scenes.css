@@ -17,7 +17,7 @@
   overflow: hidden;
   background: var(--color-bg);
   width: 100%;
-  min-height: calc(100vh - var(--header-height) - 2 * var(--padding-x));
+  min-height: calc(100vh - var(--header-height) - 3 * var(--padding-x));
   --scene-content-padding: 32px;
   --custom-scrollbar-width: 16px;
   --custom-scrollbar-gap: 10px;
@@ -31,7 +31,7 @@
   position: relative;
   z-index: 1;
   padding: var(--scene-content-padding);
-  max-height: calc(100vh - var(--header-height) - 2 * var(--padding-x));
+  max-height: calc(100vh - var(--header-height) - 3 * var(--padding-x));
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;

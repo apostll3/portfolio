@@ -28,7 +28,7 @@ section {
 /* ================= MAIN HEADER ================= */
 #main-header {
   position: relative;
-  min-height: calc(100vh - var(--header-height) - 2 * var(--padding-x));
+  min-height: calc(100vh - var(--header-height) - 3 * var(--padding-x));
   display: flex;
   align-items: center;
   justify-content: center;
