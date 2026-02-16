@@ -65,6 +65,7 @@
   gap: 0;
   position: relative;
   overflow: hidden;
+  z-index: 5;
 }
 
 .controls-toggle {
@@ -206,7 +207,7 @@
 
 @media (max-width: 600px) {
   .controls {
-    z-index: 1200;
+    z-index: 200;
   }
 
   .controls-toggle {

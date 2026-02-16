@@ -52,7 +52,7 @@ section {
   gap: 64px;
   width: 100%;
   max-width: var(--max-width);
-  
+  padding: 0 var(--padding-x);
 }
 
 /* AVATAR */
