@@ -120,6 +120,7 @@ class PortfolioApp {
     const controls = document.querySelector('.controls');
     const toggle = document.getElementById('controls-toggle');
     const panel = document.getElementById('controls-panel');
+    const menuToggle = document.getElementById('menu-toggle');
     if (!controls || !toggle || !panel) return;
 
     const body = document.body;
@@ -146,6 +147,13 @@ class PortfolioApp {
       if (!button) return;
       close();
     });
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        if (!media.matches) return;
+        close();
+      });
+    }
 
     document.addEventListener('click', event => {
       if (!media.matches || !body.classList.contains('controls-open')) return;

@@ -246,14 +246,13 @@
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: repeat(2, 44px);
+    grid-template-columns: repeat(3, 44px);
     gap: 8px;
     justify-content: center;
   }
 
   .controls-panel-content .theme-toggle,
   .controls-panel-content .lang-toggle,
-  .controls-panel-content .menu-toggle,
   .controls-panel-content .view-toggle {
     width: 44px;
     height: 44px;
