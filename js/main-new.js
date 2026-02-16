@@ -278,7 +278,7 @@ class PortfolioApp {
     const tabsContainer = sceneWindow.querySelector('.scene-tabs');
     const tabsWrap = sceneWindow.querySelector('[data-scene-tabs-wrap]');
     const tabsToggle = sceneWindow.querySelector('[data-scene-tabs-toggle]');
-    const tabsLabel = sceneWindow.querySelector('[data-scene-tabs-label]');
+    const currentIcon = sceneWindow.querySelector('[data-scene-current-icon]');
     const currentTitle = sceneWindow.querySelector('[data-scene-current-title]');
     const currentIndexEl = sceneWindow.querySelector('[data-scene-current-index]');
     const totalEl = sceneWindow.querySelector('[data-scene-total]');
@@ -348,11 +348,19 @@ class PortfolioApp {
     const syncCurrent = scene => {
       if (!scene) return;
       const label = getSceneLabel(scene);
-      if (tabsLabel) {
-        tabsLabel.textContent = 'Scenes';
-      }
       if (currentTitle) {
         currentTitle.textContent = label || scene.id;
+      }
+      if (!currentIcon) return;
+      const iconSrc = getSceneIcon(scene);
+      if (!iconSrc) {
+        currentIcon.removeAttribute('data-svg');
+        currentIcon.innerHTML = '';
+        return;
+      }
+      currentIcon.setAttribute('data-svg', iconSrc);
+      if (this.svgLoader) {
+        this.svgLoader.loadAll([currentIcon]);
       }
     };
 
