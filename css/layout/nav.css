@@ -184,7 +184,7 @@
   .nav {
     position: fixed;
     inset: 0;
-    padding: 14px;
+    padding: clamp(10px, 2vw, 18px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,12 +203,12 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
+    gap: 12px;
     position: relative;
-    width: min(360px, calc(100vw - 28px));
-    margin-top: max(8px, env(safe-area-inset-top));
-    padding: 14px;
-    border-radius: 18px;
+    width: min(430px, calc(100vw - 16px));
+    margin-top: max(6px, env(safe-area-inset-top));
+    padding: clamp(14px, 3vw, 18px);
+    border-radius: 20px;
     overflow: hidden;
     opacity: 0;
     transform: translateY(8px) scale(0.98);
@@ -259,13 +259,13 @@
     position: relative;
     z-index: 2;
     margin-top: 4px;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 8px;
   }
 
   .nav-link {
-    padding: 10px 12px;
-    font-size: 0.92rem;
+    padding: 11px 13px;
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
     border: 1px solid var(--color-border);
     border-radius: 12px;
     background: var(--color-bg);
@@ -298,13 +298,14 @@
 
 @media (max-width: 560px) {
   .nav {
-    padding: 10px;
+    padding: 8px;
   }
 
   .nav-panel {
-    width: min(340px, calc(100vw - 20px));
+    width: calc(100vw - 12px);
+    max-width: 420px;
     padding: 12px;
-    border-radius: 14px;
+    border-radius: 16px;
   }
 
   .nav-brand {
@@ -313,22 +314,22 @@
   }
 
   .nav-brand-photo {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
   }
 
   .nav-brand-photo img {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
   }
 
   .nav-brand-name {
-    font-size: 1.05rem;
+    font-size: 1.12rem;
   }
 
   .nav-link {
-    font-size: 0.86rem;
-    padding: 9px 10px;
+    font-size: 0.9rem;
+    padding: 10px 12px;
   }
 
   .nav-social {
