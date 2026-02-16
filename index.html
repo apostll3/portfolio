@@ -203,35 +203,55 @@
         <div class="scene-controls" data-scene-controls>
           <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
           <div class="scene-controls-content">
-            <button class="scene-nav scene-prev" type="button" data-scene-prev aria-label="Previous section">
-              <div class="frame-base scene-nav-frame" data-svg="assets/svg/32_frame.svg"></div>
-              <span class="scene-nav-icon" data-svg="assets/svg/icon/section-arrow.svg" aria-hidden="true"></span>
-            </button>
-            <div class="scene-tabs" role="tablist" aria-label="Scenes"></div>
-            <button class="scene-nav scene-next" type="button" data-scene-next aria-label="Next section">
-              <div class="frame-base scene-nav-frame" data-svg="assets/svg/32_frame.svg"></div>
-              <span class="scene-nav-icon" data-svg="assets/svg/icon/section-arrow.svg" aria-hidden="true"></span>
-            </button>
-          </div>
-        </div>
-        <section id="view-mode" class="view-mode" data-view="employer person">
-          <div class="view-mode-container">
-            <div class="frame-base" data-svg="assets/svg/mainheader-frame.svg"></div>
-            <div class="view-mode-content">
-              <div class="view-mode-label">Режим перегляду</div>
-              <div class="view-mode-tabs" role="tablist" aria-label="Режим перегляду">
-                <button class="view-mode-tab is-active" type="button" data-view-mode="employer" role="tab"
-                  aria-selected="true">
-                  Для роботодавця
+            <div class="scene-controls-nav">
+              <button class="scene-nav scene-prev" type="button" data-scene-prev aria-label="Previous section">
+                <div class="frame-base scene-nav-frame" data-svg="assets/svg/32_frame.svg"></div>
+                <span class="scene-nav-icon" data-svg="assets/svg/icon/section-arrow.svg" aria-hidden="true"></span>
+              </button>
+
+              <div class="scene-controls-center">
+                <button class="scene-tabs-toggle" type="button" data-scene-tabs-toggle aria-expanded="false"
+                  aria-controls="scene-tabs-list">
+                  <span class="scene-tabs-toggle-icon"
+                    data-svg="assets/svg/icon/menu-navigation-horizontal--Streamline-Freehand.svg"
+                    aria-hidden="true"></span>
+                  <span class="scene-tabs-toggle-label" data-scene-tabs-label>Scenes</span>
                 </button>
-                <button class="view-mode-tab" type="button" data-view-mode="person" role="tab" aria-selected="false">
-                  Для людини
-                </button>
+                <div class="scene-controls-title" data-scene-current-title aria-live="polite">Scene</div>
+
+                <div class="scene-tabs-wrap" data-scene-tabs-wrap aria-hidden="true">
+                  <div id="scene-tabs-list" class="scene-tabs" role="tablist" aria-label="Scenes"></div>
+                </div>
               </div>
+
+              <section id="view-mode" class="view-mode" data-view="employer person">
+                <div class="view-mode-label">Mode</div>
+                <div class="view-mode-tabs" role="tablist" aria-label="View mode">
+                  <button class="view-mode-tab is-active" type="button" data-view-mode="employer" role="tab"
+                    aria-selected="true">
+                    <span class="view-mode-tab-long">Employer</span>
+                    <span class="view-mode-tab-short" aria-hidden="true">HR</span>
+                  </button>
+                  <button class="view-mode-tab" type="button" data-view-mode="person" role="tab" aria-selected="false">
+                    <span class="view-mode-tab-long">Personal</span>
+                    <span class="view-mode-tab-short" aria-hidden="true">ME</span>
+                  </button>
+                </div>
+              </section>
+
+              <div class="scene-progress" data-scene-progress aria-live="polite">
+                <span class="scene-progress-current" data-scene-current-index>1</span>
+                <span class="scene-progress-separator" aria-hidden="true">/</span>
+                <span class="scene-progress-total" data-scene-total>1</span>
+              </div>
+
+              <button class="scene-nav scene-next" type="button" data-scene-next aria-label="Next section">
+                <div class="frame-base scene-nav-frame" data-svg="assets/svg/32_frame.svg"></div>
+                <span class="scene-nav-icon" data-svg="assets/svg/icon/section-arrow.svg" aria-hidden="true"></span>
+              </button>
             </div>
           </div>
-        </section>
-
+        </div>
         <div class="scene-container">
           <section id="about" class="scene scene-active" data-view="person">
             <div class="about-container">

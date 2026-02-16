@@ -270,50 +270,111 @@ class PortfolioApp {
     const sceneWindow = document.getElementById('scene-window');
     if (!sceneWindow) return;
 
+    const content = sceneWindow.querySelector('.scene-window-content');
     const scenes = Array.from(document.querySelectorAll('section.scene'));
     if (!scenes.length) return;
 
     const controls = sceneWindow.querySelector('[data-scene-controls]');
     const tabsContainer = sceneWindow.querySelector('.scene-tabs');
+    const tabsWrap = sceneWindow.querySelector('[data-scene-tabs-wrap]');
+    const tabsToggle = sceneWindow.querySelector('[data-scene-tabs-toggle]');
+    const tabsLabel = sceneWindow.querySelector('[data-scene-tabs-label]');
+    const currentTitle = sceneWindow.querySelector('[data-scene-current-title]');
+    const currentIndexEl = sceneWindow.querySelector('[data-scene-current-index]');
+    const totalEl = sceneWindow.querySelector('[data-scene-total]');
     const prevBtn = sceneWindow.querySelector('[data-scene-prev]');
     const nextBtn = sceneWindow.querySelector('[data-scene-next]');
+    const compactMedia = window.matchMedia('(max-width: 760px)');
+    const sceneData = scenes
+      .filter(scene => scene.id)
+      .map(scene => ({ id: scene.id, element: scene }));
 
     const getVisibleScenes = () => {
       const mode = document.body.dataset.viewMode;
-      return scenes.filter(scene => {
-        const view = scene.getAttribute('data-view');
+      return sceneData.filter(item => {
+        const view = item.element.getAttribute('data-view');
         if (!view || !mode) return true;
         return view.split(/\s+/).includes(mode);
       });
     };
 
     let currentIndex = 0;
+    let currentSceneId = '';
 
     const getSceneLabel = scene => {
+      if (!scene) return '';
       const title = scene.querySelector('.section-title-text');
       return title ? title.textContent.trim() : scene.id;
     };
 
     const getSceneIcon = scene => {
+      if (!scene) return '';
       const icon = scene.querySelector('.section-title-icon');
       return icon ? icon.getAttribute('data-svg') : null;
     };
 
-    const syncTabs = () => {
+    const setTabsMenuOpen = isOpen => {
+      if (!controls || !tabsToggle) return;
+      if (!compactMedia.matches) {
+        controls.classList.remove('is-tabs-open');
+        tabsToggle.setAttribute('aria-expanded', 'false');
+        if (tabsWrap) tabsWrap.setAttribute('aria-hidden', 'false');
+        return;
+      }
+      controls.classList.toggle('is-tabs-open', isOpen);
+      tabsToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (tabsWrap) {
+        tabsWrap.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      }
+    };
+
+    const syncTabs = visible => {
       if (!tabsContainer) return;
-      const visible = getVisibleScenes();
-      const visibleIds = new Set(visible.map(scene => scene.id));
+      const visibleIds = new Set(visible.map(item => item.id));
       tabsContainer.querySelectorAll('.scene-tab').forEach(tab => {
         const id = tab.getAttribute('data-scene-target');
-        tab.style.display = visibleIds.has(id) ? '' : 'none';
-        const scene = scenes.find(scene => scene.id === id);
+        const scene = sceneData.find(item => item.id === id)?.element;
         const label = getSceneLabel(scene) || id;
         const textEl = tab.querySelector('.scene-tab-text');
         if (textEl) textEl.textContent = label;
+        const isVisible = visibleIds.has(id);
+        const isActive = id === currentSceneId;
+        tab.hidden = !isVisible;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
     };
 
-    const setActive = scene => {
+    const syncCurrent = scene => {
+      if (!scene) return;
+      const label = getSceneLabel(scene);
+      if (tabsLabel) {
+        tabsLabel.textContent = 'Scenes';
+      }
+      if (currentTitle) {
+        currentTitle.textContent = label || scene.id;
+      }
+    };
+
+    const syncProgress = visible => {
+      if (totalEl) totalEl.textContent = String(visible.length);
+      if (currentIndexEl) currentIndexEl.textContent = String(visible.length ? currentIndex + 1 : 0);
+    };
+
+    const syncNavButtons = visible => {
+      const atStart = currentIndex <= 0;
+      const atEnd = currentIndex >= visible.length - 1;
+      if (prevBtn) {
+        prevBtn.disabled = atStart;
+        prevBtn.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+      }
+      if (nextBtn) {
+        nextBtn.disabled = atEnd;
+        nextBtn.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
+      }
+    };
+
+    const setActive = (scene, behavior = 'smooth') => {
       const current = document.querySelector('section.scene.scene-active');
 
       if (current && current !== scene) {
@@ -335,53 +396,69 @@ class PortfolioApp {
 
       scene.classList.add('scene-active');
       scene.style.display = 'block';
-      if (tabsContainer) {
-        tabsContainer.querySelectorAll('.scene-tab').forEach(tab => {
-          tab.classList.toggle('is-active', tab.getAttribute('data-scene-target') === scene.id);
-        });
+      currentSceneId = scene.id;
+
+      if (content) {
+        content.scrollTo({ top: 0, behavior });
       }
-      syncTabs();
-      document.dispatchEvent(new CustomEvent('scenechange', { detail: { id: scene.id } }));
     };
 
-    const showByIndex = index => {
+    const updateUI = (visible, activeScene) => {
+      if (!visible.length || !activeScene) return;
+      currentSceneId = activeScene.id;
+      currentIndex = visible.findIndex(item => item.id === activeScene.id);
+      syncTabs(visible);
+      syncCurrent(activeScene);
+      syncProgress(visible);
+      syncNavButtons(visible);
+    };
+
+    const showByIndex = (index, options = {}) => {
       const visible = getVisibleScenes();
       if (!visible.length) return null;
-      const nextIndex = ((index % visible.length) + visible.length) % visible.length;
+      const nextIndex = Math.max(0, Math.min(index, visible.length - 1));
       currentIndex = nextIndex;
-      const scene = visible[nextIndex];
-      setActive(scene);
-      return scene;
+      const target = visible[nextIndex].element;
+      const behavior = options.behavior || 'smooth';
+
+      setActive(target, behavior);
+      updateUI(visible, target);
+      document.dispatchEvent(new CustomEvent('scenechange', { detail: { id: target.id } }));
+      return target;
     };
 
-    const showById = id => {
+    const showById = (id, options = {}) => {
       const visible = getVisibleScenes();
-      const index = visible.findIndex(scene => scene.id === id);
+      const index = visible.findIndex(item => item.id === id);
       if (index === -1) return null;
-      return showByIndex(index);
+      return showByIndex(index, options);
     };
 
     if (tabsContainer) {
       tabsContainer.innerHTML = '';
-      scenes.forEach(scene => {
+      sceneData.forEach(item => {
         const tab = document.createElement('button');
         tab.type = 'button';
         tab.className = 'scene-tab';
         tab.setAttribute('role', 'tab');
-        tab.setAttribute('data-scene-target', scene.id);
+        tab.setAttribute('data-scene-target', item.id);
+        tab.setAttribute('aria-selected', 'false');
 
-        const iconSrc = getSceneIcon(scene);
+        const iconSrc = getSceneIcon(item.element);
         const iconEl = document.createElement('span');
         iconEl.className = 'scene-tab-icon';
         if (iconSrc) iconEl.setAttribute('data-svg', iconSrc);
 
         const textEl = document.createElement('span');
         textEl.className = 'scene-tab-text';
-        textEl.textContent = getSceneLabel(scene);
+        textEl.textContent = getSceneLabel(item.element);
 
         tab.appendChild(iconEl);
         tab.appendChild(textEl);
-        tab.addEventListener('click', () => showById(scene.id));
+        tab.addEventListener('click', () => {
+          showById(item.id);
+          setTabsMenuOpen(false);
+        });
         tabsContainer.appendChild(tab);
       });
 
@@ -391,8 +468,8 @@ class PortfolioApp {
     }
 
     const hash = window.location.hash ? window.location.hash.slice(1) : '';
-    if (!showById(hash)) {
-      showByIndex(0);
+    if (!showById(hash, { behavior: 'auto' })) {
+      showByIndex(0, { behavior: 'auto' });
     }
 
     if (prevBtn) {
@@ -403,11 +480,20 @@ class PortfolioApp {
       nextBtn.addEventListener('click', () => showByIndex(currentIndex + 1));
     }
 
+    if (tabsToggle) {
+      tabsToggle.addEventListener('click', event => {
+        if (!compactMedia.matches) return;
+        event.preventDefault();
+        const next = !controls?.classList.contains('is-tabs-open');
+        setTabsMenuOpen(next);
+      });
+    }
+
     document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
       link.addEventListener('click', event => {
         const targetId = link.getAttribute('href')?.slice(1);
         if (!targetId) return;
-        const targetScene = scenes.find(scene => scene.id === targetId);
+        const targetScene = sceneData.find(item => item.id === targetId)?.element;
         if (!targetScene) return;
 
         event.preventDefault();
@@ -421,17 +507,47 @@ class PortfolioApp {
           }
         }
 
-        showById(targetId);
+        showById(targetId, { behavior: 'smooth' });
+        setTabsMenuOpen(false);
         sceneWindow.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
-    document.addEventListener('viewmodechange', () => {
-      const active = document.querySelector('section.scene.scene-active');
-      const activeId = active?.id;
-      if (activeId && showById(activeId)) return;
-      showByIndex(0);
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle) {
+      langToggle.addEventListener('click', () => {
+        window.setTimeout(() => {
+          const visible = getVisibleScenes();
+          if (!visible.length) return;
+          const fallback = visible[Math.min(currentIndex, visible.length - 1)];
+          const active = sceneData.find(item => item.id === currentSceneId) || fallback;
+          updateUI(visible, active.element || active);
+        }, 0);
+      });
+    }
+
+    document.addEventListener('click', event => {
+      if (!compactMedia.matches) return;
+      if (!controls || controls.contains(event.target)) return;
+      setTabsMenuOpen(false);
     });
+
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      setTabsMenuOpen(false);
+    });
+
+    compactMedia.addEventListener('change', () => {
+      setTabsMenuOpen(false);
+    });
+
+    document.addEventListener('viewmodechange', () => {
+      const activeId = currentSceneId || document.querySelector('section.scene.scene-active')?.id;
+      if (activeId && showById(activeId, { behavior: 'auto' })) return;
+      showByIndex(0, { behavior: 'auto' });
+    });
+
+    setTabsMenuOpen(false);
   }
 
   /**
