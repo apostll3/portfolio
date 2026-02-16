@@ -417,6 +417,8 @@ body.custom-page-scrollbar::-webkit-scrollbar {
   gap: 8px;
   overflow-x: auto;
   overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 10px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }

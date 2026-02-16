@@ -345,6 +345,30 @@ class PortfolioApp {
       });
     };
 
+    const scrollActiveTabIntoView = (behavior = 'smooth') => {
+      if (!tabsContainer || compactMedia.matches) return;
+      if (tabsContainer.scrollWidth <= tabsContainer.clientWidth + 1) return;
+
+      const activeTab = tabsContainer.querySelector('.scene-tab.is-active:not([hidden])');
+      if (!activeTab) return;
+
+      const containerRect = tabsContainer.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+      const padding = 10;
+      const outLeft = tabRect.left < containerRect.left + padding;
+      const outRight = tabRect.right > containerRect.right - padding;
+      if (!outLeft && !outRight) return;
+
+      const targetLeft = tabsContainer.scrollLeft
+        + (tabRect.left - containerRect.left)
+        - (containerRect.width - tabRect.width) / 2;
+
+      tabsContainer.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior
+      });
+    };
+
     const syncCurrent = scene => {
       if (!scene) return;
       const label = getSceneLabel(scene);
@@ -411,11 +435,12 @@ class PortfolioApp {
       }
     };
 
-    const updateUI = (visible, activeScene) => {
+    const updateUI = (visible, activeScene, options = {}) => {
       if (!visible.length || !activeScene) return;
       currentSceneId = activeScene.id;
       currentIndex = visible.findIndex(item => item.id === activeScene.id);
       syncTabs(visible);
+      scrollActiveTabIntoView(options.tabBehavior || (options.behavior === 'smooth' ? 'smooth' : 'auto'));
       syncCurrent(activeScene);
       syncProgress(visible);
       syncNavButtons(visible);
@@ -430,7 +455,7 @@ class PortfolioApp {
       const behavior = options.behavior || 'smooth';
 
       setActive(target, behavior);
-      updateUI(visible, target);
+      updateUI(visible, target, { behavior });
       document.dispatchEvent(new CustomEvent('scenechange', { detail: { id: target.id } }));
       return target;
     };
@@ -529,7 +554,7 @@ class PortfolioApp {
           if (!visible.length) return;
           const fallback = visible[Math.min(currentIndex, visible.length - 1)];
           const active = sceneData.find(item => item.id === currentSceneId) || fallback;
-          updateUI(visible, active.element || active);
+          updateUI(visible, active.element || active, { behavior: 'auto' });
         }, 0);
       });
     }
@@ -547,6 +572,9 @@ class PortfolioApp {
 
     compactMedia.addEventListener('change', () => {
       setTabsMenuOpen(false);
+      if (!compactMedia.matches) {
+        window.requestAnimationFrame(() => scrollActiveTabIntoView('auto'));
+      }
     });
 
     document.addEventListener('viewmodechange', () => {
