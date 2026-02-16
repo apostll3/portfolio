@@ -148,9 +148,13 @@ body.custom-page-scrollbar::-webkit-scrollbar {
   top: var(--padding-x);
   bottom: var(--padding-x);
   right: 0;
+  width: calc(var(--custom-scrollbar-width) * 2);
   display: grid;
   grid-template-columns: var(--custom-scrollbar-width) var(--custom-scrollbar-width);
+  grid-template-rows: var(--scrollbar-button-size) 1fr var(--scrollbar-button-size);
   column-gap: 0;
+  row-gap: 0;
+  align-items: stretch;
   z-index: 900;
   opacity: 0;
   pointer-events: none;
@@ -167,12 +171,6 @@ body.custom-page-scrollbar::-webkit-scrollbar {
   pointer-events: none;
 }
 
-.page-scrollbar-left {
-  position: relative;
-  width: var(--custom-scrollbar-width);
-  height: 100%;
-}
-
 .page-scrollbar-btn {
   width: var(--scrollbar-button-size);
   height: var(--scrollbar-button-size);
@@ -182,24 +180,27 @@ body.custom-page-scrollbar::-webkit-scrollbar {
   background-size: 100% 100%;
   background-position: center;
   cursor: pointer;
+  grid-column: 1;
+  justify-self: start;
 }
 
 .page-scrollbar-btn--up {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-row: 1;
+  align-self: start;
   background-image: var(--scrollbar-arrow-up, url('../../assets/svg/scrollbar/arrow-up.svg'));
 }
 
 .page-scrollbar-btn--down {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  grid-row: 3;
+  align-self: end;
   background-image: var(--scrollbar-arrow-down, url('../../assets/svg/scrollbar/arrow-down.svg'));
 }
 
 .page-scrollbar-track {
+  grid-column: 2;
+  grid-row: 1 / 4;
   position: relative;
+  overflow: visible;
   width: var(--custom-scrollbar-width);
   height: 100%;
   background-image: var(--scrollbar-track, url('../../assets/svg/scrollbar/track.svg'));
@@ -212,8 +213,9 @@ body.custom-page-scrollbar::-webkit-scrollbar {
 .page-scrollbar-thumb {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: calc(-1 * var(--custom-scrollbar-width));
+  right: auto;
+  width: var(--custom-scrollbar-width);
   height: 40px;
   background-image: var(--scrollbar-thumb, url('../../assets/svg/scrollbar/thumb.svg'));
   background-repeat: no-repeat;
@@ -230,7 +232,40 @@ body.custom-page-scrollbar::-webkit-scrollbar {
 @media (max-width: 1740px) {
   .page-scrollbar {
     top: calc(var(--header-height) + var(--padding-x)) !important;
-    right:0;
+    right: 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .page-scrollbar {
+    width: var(--custom-scrollbar-width);
+    right: max(0px, env(safe-area-inset-right));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .page-scrollbar-btn {
+    width: 12px;
+    height: 12px;
+  }
+
+  .page-scrollbar-track {
+    width: var(--custom-scrollbar-width);
+    flex: 1;
+    min-height: 0;
+  }
+
+  .page-scrollbar-thumb {
+    left: 0;
+    right: 0;
+    width: auto;
+  }
+
+  .page-scrollbar-btn--up,
+  .page-scrollbar-btn--down,
+  .page-scrollbar-track {
+    order: initial;
   }
 }
 

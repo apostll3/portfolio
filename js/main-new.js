@@ -783,9 +783,7 @@ class PortfolioApp {
       const clientHeight = scrollEl.clientHeight;
       const maxScrollTop = Math.max(scrollHeight - clientHeight, 0);
       const trackHeight = track.clientHeight;
-      const insetTop = btnUp ? btnUp.offsetHeight : 0;
-      const insetBottom = btnDown ? btnDown.offsetHeight : 0;
-      const usableHeight = Math.max(trackHeight - insetTop - insetBottom, 0);
+      const usableHeight = Math.max(trackHeight, 0);
 
       const hasScroll = maxScrollTop > 1;
       scrollbar.classList.toggle('is-hidden', !hasScroll);
@@ -794,13 +792,19 @@ class PortfolioApp {
         return;
       }
 
-      const minThumb = 32;
+      if (usableHeight <= 0) {
+        thumb.style.height = '0px';
+        thumb.style.transform = 'translateY(0)';
+        return;
+      }
+
+      const minThumb = Math.min(32, usableHeight);
       const rawThumb = (clientHeight / scrollHeight) * usableHeight;
-      const thumbHeight = Math.max(Math.min(rawThumb, usableHeight || 0), minThumb);
+      const thumbHeight = Math.max(Math.min(rawThumb, usableHeight), minThumb);
       const maxThumbTop = Math.max(usableHeight - thumbHeight, 0);
 
       const ratio = maxScrollTop > 0 ? scrollEl.scrollTop / maxScrollTop : 0;
-      const thumbTop = insetTop + ratio * maxThumbTop;
+      const thumbTop = ratio * maxThumbTop;
 
       thumb.style.height = `${thumbHeight}px`;
       thumb.style.transform = `translateY(${thumbTop}px)`;
@@ -832,12 +836,10 @@ class PortfolioApp {
       if (event.target === thumb) return;
       const rect = track.getBoundingClientRect();
       const clickY = event.clientY - rect.top;
-      const insetTop = btnUp ? btnUp.offsetHeight : 0;
-      const insetBottom = btnDown ? btnDown.offsetHeight : 0;
-      const usableHeight = Math.max(rect.height - insetTop - insetBottom, 0);
+      const usableHeight = Math.max(rect.height, 0);
       const thumbHeight = thumb.offsetHeight;
       const maxThumbTop = Math.max(usableHeight - thumbHeight, 0);
-      const targetThumbTop = Math.min(Math.max(clickY - insetTop - thumbHeight / 2, 0), maxThumbTop);
+      const targetThumbTop = Math.min(Math.max(clickY - thumbHeight / 2, 0), maxThumbTop);
       const maxScrollTop = Math.max(scrollEl.scrollHeight - scrollEl.clientHeight, 0);
       if (maxThumbTop > 0) {
         scrollEl.scrollTop = (targetThumbTop / maxThumbTop) * maxScrollTop;
@@ -856,9 +858,7 @@ class PortfolioApp {
     thumb.addEventListener('pointermove', event => {
       if (!isDragging) return;
       const trackHeight = track.clientHeight;
-      const insetTop = btnUp ? btnUp.offsetHeight : 0;
-      const insetBottom = btnDown ? btnDown.offsetHeight : 0;
-      const usableHeight = Math.max(trackHeight - insetTop - insetBottom, 0);
+      const usableHeight = Math.max(trackHeight, 0);
       const thumbHeight = thumb.offsetHeight;
       const maxThumbTop = Math.max(usableHeight - thumbHeight, 0);
       const maxScrollTop = Math.max(scrollEl.scrollHeight - scrollEl.clientHeight, 0);
