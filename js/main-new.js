@@ -32,6 +32,9 @@ class PortfolioApp {
       // Initialize mobile menu
       this.initMenu();
 
+      // Collapse header controls to one trigger on small screens
+      this.initControlsDropdown();
+
       // Prevent flicker on responsive resize
       this.initResizeGuard();
 
@@ -72,7 +75,7 @@ class PortfolioApp {
     const body = document.body;
     const nav = document.querySelector('.nav');
     const navLinks = document.querySelectorAll('.nav-link');
-    const media = window.matchMedia('(min-width: 769px)');
+    const media = window.matchMedia('(min-width: 981px)');
 
     const closeMenu = () => {
       if (!body.classList.contains('menu-open')) return;
@@ -108,6 +111,63 @@ class PortfolioApp {
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape') closeMenu();
     });
+  }
+
+  /**
+   * Small screens: one controls trigger + dropdown panel
+   */
+  initControlsDropdown() {
+    const controls = document.querySelector('.controls');
+    const toggle = document.getElementById('controls-toggle');
+    const panel = document.getElementById('controls-panel');
+    if (!controls || !toggle || !panel) return;
+
+    const body = document.body;
+    const media = window.matchMedia('(max-width: 600px)');
+
+    const setOpen = isOpen => {
+      body.classList.toggle('controls-open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      panel.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    };
+
+    const close = () => setOpen(false);
+
+    toggle.addEventListener('click', event => {
+      if (!media.matches) return;
+      event.preventDefault();
+      event.stopPropagation();
+      setOpen(!body.classList.contains('controls-open'));
+    });
+
+    panel.addEventListener('click', event => {
+      if (!media.matches) return;
+      const button = event.target.closest('button');
+      if (!button) return;
+      close();
+    });
+
+    document.addEventListener('click', event => {
+      if (!media.matches || !body.classList.contains('controls-open')) return;
+      if (event.target.closest('.controls')) return;
+      close();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape') return;
+      close();
+    });
+
+    window.addEventListener('scroll', () => {
+      if (!media.matches) return;
+      close();
+    }, { passive: true });
+
+    media.addEventListener('change', event => {
+      if (!event.matches) close();
+    });
+
+    close();
   }
 
   /**
