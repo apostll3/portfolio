@@ -53,6 +53,9 @@ class PortfolioApp {
       // Section lock between main-header and scene-window
       this.initSectionLock();
 
+      // Stable anchor scroll for header navigation
+      this.initSectionAnchors();
+
       // Initialize scrollbar theme swap
       this.initScrollbarTheme();
 
@@ -74,7 +77,7 @@ class PortfolioApp {
 
     const body = document.body;
     const nav = document.querySelector('.nav');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, .nav-brand');
     const media = window.matchMedia('(min-width: 981px)');
 
     const closeMenu = () => {
@@ -189,6 +192,114 @@ class PortfolioApp {
       resizeTimer = window.setTimeout(() => {
         document.body.classList.remove('no-transition');
       }, 120);
+    });
+  }
+
+  /**
+   * Main page sections used for lock/quick navigation
+   */
+  getMainSections() {
+    return [
+      document.getElementById('main-header'),
+      document.getElementById('scene-window')
+    ].filter(Boolean);
+  }
+
+  /**
+   * Scroll offset to keep section below fixed header
+   */
+  getSectionScrollOffset() {
+    const header = document.querySelector('.header');
+    const headerHeight = header ? header.getBoundingClientRect().height || 0 : 0;
+    const paddingX = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--padding-x')) || 0;
+    return Math.max(headerHeight + paddingX, 0);
+  }
+
+  /**
+   * Absolute target top for section scroll
+   */
+  getSectionTop(section) {
+    if (!section) return 0;
+    return Math.max(section.offsetTop - this.getSectionScrollOffset(), 0);
+  }
+
+  /**
+   * Programmatic scroll to known section id
+   */
+  scrollToSectionById(sectionId, behavior = 'smooth') {
+    const section = document.getElementById(sectionId);
+    if (!section) return false;
+    window.scrollTo({ top: this.getSectionTop(section), behavior });
+    return true;
+  }
+
+  /**
+   * Move to previous/next main section
+   */
+  scrollMainSectionByDirection(direction, behavior = 'smooth') {
+    const sections = this.getMainSections();
+    if (!sections.length) return false;
+
+    const positions = sections.map(section => this.getSectionTop(section));
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    let currentIndex = 0;
+    let bestDistance = Number.POSITIVE_INFINITY;
+
+    positions.forEach((position, index) => {
+      const distance = Math.abs(scrollTop - position);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        currentIndex = index;
+      }
+    });
+
+    const delta = direction > 0 ? 1 : -1;
+    const nextIndex = Math.max(0, Math.min(currentIndex + delta, positions.length - 1));
+    window.scrollTo({ top: positions[nextIndex], behavior });
+    return true;
+  }
+
+  /**
+   * Keep header overlays closed before scroll navigation
+   */
+  closeHeaderOverlays() {
+    const body = document.body;
+    const menuToggle = document.getElementById('menu-toggle');
+    const controlsToggle = document.getElementById('controls-toggle');
+    const controlsPanel = document.getElementById('controls-panel');
+
+    body.classList.remove('controls-open');
+    if (controlsToggle) controlsToggle.setAttribute('aria-expanded', 'false');
+    if (controlsPanel) controlsPanel.setAttribute('aria-hidden', 'true');
+
+    if (!body.classList.contains('menu-open')) return;
+
+    body.classList.remove('menu-open');
+    body.classList.add('menu-closing');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+    window.setTimeout(() => {
+      body.classList.remove('menu-closing');
+    }, 200);
+  }
+
+  /**
+   * Stable anchor scrolling for #main-header and #scene-window
+   */
+  initSectionAnchors() {
+    const links = document.querySelectorAll('a[href="#main-header"], a[href="#scene-window"]');
+    if (!links.length) return;
+
+    links.forEach(link => {
+      link.addEventListener('click', event => {
+        const href = link.getAttribute('href');
+        if (!href || !href.startsWith('#')) return;
+        const targetId = href.slice(1);
+        if (!targetId) return;
+
+        event.preventDefault();
+        this.closeHeaderOverlays();
+        this.scrollToSectionById(targetId, 'smooth');
+      });
     });
   }
 
@@ -550,7 +661,8 @@ class PortfolioApp {
 
         showById(targetId, { behavior: 'smooth' });
         setTabsMenuOpen(false);
-        sceneWindow.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.closeHeaderOverlays();
+        this.scrollToSectionById('scene-window', 'smooth');
       });
     });
 
@@ -748,17 +860,8 @@ class PortfolioApp {
     ].filter(Boolean);
     if (sections.length < 2) return;
 
-    const getOffsets = () => {
-      const header = document.querySelector('.header');
-      const headerHeight = header ? header.getBoundingClientRect().height || 0 : 0;
-      const paddingX = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--padding-x')) || 0;
-      return { headerHeight, paddingX };
-    };
-
     const getPositions = () => {
-      const { headerHeight, paddingX } = getOffsets();
-      const targetOffset = Math.max(headerHeight - (paddingX - paddingX * 2), 0);
-      return sections.map(section => Math.max(section.offsetTop - targetOffset, 0));
+      return sections.map(section => this.getSectionTop(section));
     };
 
     const getClosestIndex = () => {
@@ -978,18 +1081,20 @@ class PortfolioApp {
       });
     };
 
-    const scrollByStep = delta => {
-      scrollEl.scrollBy({ top: delta, behavior: 'smooth' });
+    const scrollPageByDirection = direction => {
+      if (this.scrollMainSectionByDirection(direction, 'smooth')) return;
+      const targetTop = direction < 0 ? 0 : Math.max(scrollEl.scrollHeight - scrollEl.clientHeight, 0);
+      scrollEl.scrollTo({ top: targetTop, behavior: 'smooth' });
     };
 
     window.addEventListener('scroll', requestUpdate);
     window.addEventListener('resize', requestUpdate);
 
     if (btnUp) {
-      btnUp.addEventListener('click', () => scrollByStep(-120));
+      btnUp.addEventListener('click', () => scrollPageByDirection(-1));
     }
     if (btnDown) {
-      btnDown.addEventListener('click', () => scrollByStep(120));
+      btnDown.addEventListener('click', () => scrollPageByDirection(1));
     }
 
     track.addEventListener('pointerdown', event => {
