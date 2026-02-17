@@ -189,9 +189,22 @@
             Поєдную код, дизайн і розуміння людей у рішення, що реально працюють.
             Вірю в чесність підходу, здорові межі та баланс між технікою та сенсом.
           </p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary" data-i18n="projects">Проєкти</a>
-            <a href="#contact" class="btn btn-secondary" data-i18n="contact">Контакт</a>
+          <div class="hero-actions">
+            <div class="hero-buttons">
+              <a href="#scene-window" class="btn btn-primary" data-i18n="projects">Проєкти</a>
+            </div>
+            <div class="hero-view-mode" role="group" aria-label="View mode">
+              <span class="hero-view-label">View</span>
+              <div class="hero-view-tabs" role="tablist" aria-label="View mode">
+                <button class="hero-view-tab is-active" type="button" data-view-mode="employer" role="tab"
+                  aria-selected="true">
+                  Employer
+                </button>
+                <button class="hero-view-tab" type="button" data-view-mode="person" role="tab" aria-selected="false">
+                  Personal
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
