@@ -5,10 +5,17 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   position: relative;
+  min-height: 100dvh;
 }
 
 html {
+  background: var(--color-bg);
   scroll-padding-top: calc(var(--header-height) + 2 * var(--padding-x));
+  overscroll-behavior-y: none;
+}
+
+body {
+  overscroll-behavior-y: none;
 }
 /* 
 body::before {

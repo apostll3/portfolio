@@ -13,6 +13,8 @@ class PortfolioApp {
     this.i18n = new I18nManager();
     this.svgLoader = new SVGLoader();
     this.menuToggle = null;
+    this.menuScrollLockY = 0;
+    this.menuCloseTimer = null;
   }
 
   /**
@@ -53,6 +55,9 @@ class PortfolioApp {
       // Section lock between main-header and scene-window
       this.initSectionLock();
 
+      // Prevent iOS/Android rubber-band overscroll (body bounce)
+      this.initTouchBounceGuard();
+
       // Stable anchor scroll for header navigation
       this.initSectionAnchors();
 
@@ -69,6 +74,72 @@ class PortfolioApp {
   }
 
   /**
+   * Lock page scroll (mobile-safe, including iOS)
+   */
+  lockBodyScroll() {
+    const body = document.body;
+    const root = document.documentElement;
+    if (!body || body.classList.contains('menu-scroll-lock')) return;
+
+    this.menuScrollLockY = window.scrollY || root.scrollTop || 0;
+    body.style.top = `-${this.menuScrollLockY}px`;
+    body.classList.add('menu-scroll-lock');
+    root.classList.add('menu-scroll-lock');
+  }
+
+  /**
+   * Unlock page scroll and restore previous position
+   */
+  unlockBodyScroll() {
+    const body = document.body;
+    const root = document.documentElement;
+    if (!body || !body.classList.contains('menu-scroll-lock')) return;
+
+    body.classList.remove('menu-scroll-lock');
+    root.classList.remove('menu-scroll-lock');
+    body.style.removeProperty('top');
+
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, this.menuScrollLockY);
+    root.style.scrollBehavior = previousScrollBehavior;
+  }
+
+  /**
+   * Close mobile navigation menu
+   */
+  closeMenu() {
+    const body = document.body;
+    if (!body || !body.classList.contains('menu-open')) return;
+
+    body.classList.remove('menu-open');
+    body.classList.add('menu-closing');
+    this.unlockBodyScroll();
+    if (this.menuToggle) this.menuToggle.setAttribute('aria-expanded', 'false');
+
+    window.clearTimeout(this.menuCloseTimer);
+    this.menuCloseTimer = window.setTimeout(() => {
+      body.classList.remove('menu-closing');
+    }, 200);
+  }
+
+  /**
+   * Open mobile navigation menu
+   */
+  openMenu() {
+    const body = document.body;
+    if (!body) return;
+
+    window.clearTimeout(this.menuCloseTimer);
+    body.classList.remove('menu-closing');
+    if (body.classList.contains('menu-open')) return;
+
+    body.classList.add('menu-open');
+    this.lockBodyScroll();
+    if (this.menuToggle) this.menuToggle.setAttribute('aria-expanded', 'true');
+  }
+
+  /**
    * Initialize mobile menu toggle
    */
   initMenu() {
@@ -80,39 +151,27 @@ class PortfolioApp {
     const navLinks = document.querySelectorAll('.nav-link, .nav-brand');
     const media = window.matchMedia('(min-width: 981px)');
 
-    const closeMenu = () => {
-      if (!body.classList.contains('menu-open')) return;
-      body.classList.remove('menu-open');
-      body.classList.add('menu-closing');
-      this.menuToggle.setAttribute('aria-expanded', 'false');
-      window.setTimeout(() => {
-        body.classList.remove('menu-closing');
-      }, 200);
-    };
-
     const toggleMenu = () => {
       if (body.classList.contains('menu-open')) {
-        closeMenu();
+        this.closeMenu();
         return;
       }
-      body.classList.remove('menu-closing');
-      body.classList.add('menu-open');
-      this.menuToggle.setAttribute('aria-expanded', 'true');
+      this.openMenu();
     };
 
     this.menuToggle.addEventListener('click', toggleMenu);
-    navLinks.forEach(link => link.addEventListener('click', closeMenu));
+    navLinks.forEach(link => link.addEventListener('click', () => this.closeMenu()));
     if (nav) {
       nav.addEventListener('click', event => {
         if (event.target.closest('.nav-panel')) return;
-        closeMenu();
+        this.closeMenu();
       });
     }
     media.addEventListener('change', event => {
-      if (event.matches) closeMenu();
+      if (event.matches) this.closeMenu();
     });
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeMenu();
+      if (event.key === 'Escape') this.closeMenu();
     });
   }
 
@@ -264,22 +323,13 @@ class PortfolioApp {
    */
   closeHeaderOverlays() {
     const body = document.body;
-    const menuToggle = document.getElementById('menu-toggle');
     const controlsToggle = document.getElementById('controls-toggle');
     const controlsPanel = document.getElementById('controls-panel');
 
     body.classList.remove('controls-open');
     if (controlsToggle) controlsToggle.setAttribute('aria-expanded', 'false');
     if (controlsPanel) controlsPanel.setAttribute('aria-hidden', 'true');
-
-    if (!body.classList.contains('menu-open')) return;
-
-    body.classList.remove('menu-open');
-    body.classList.add('menu-closing');
-    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-    window.setTimeout(() => {
-      body.classList.remove('menu-closing');
-    }, 200);
+    this.closeMenu();
   }
 
   /**
@@ -957,6 +1007,55 @@ class PortfolioApp {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchend', onTouchEnd, { passive: true });
+  }
+
+  /**
+   * Prevent viewport bounce on touch devices when scroll reaches edges
+   */
+  initTouchBounceGuard() {
+    if (!('ontouchstart' in window)) return;
+
+    const pageScroller = document.scrollingElement || document.documentElement;
+    let lastTouchY = 0;
+
+    const getScrollableParent = startNode => {
+      let node = startNode && startNode.nodeType === 1 ? startNode : startNode?.parentElement;
+
+      while (node && node !== document.body && node !== document.documentElement) {
+        const style = window.getComputedStyle(node);
+        const canScrollY = /(auto|scroll|overlay)/.test(style.overflowY);
+        if (canScrollY && node.scrollHeight > node.clientHeight + 1) {
+          return node;
+        }
+        node = node.parentElement;
+      }
+
+      return null;
+    };
+
+    window.addEventListener('touchstart', event => {
+      if (event.touches.length !== 1) return;
+      lastTouchY = event.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', event => {
+      if (event.touches.length !== 1) return;
+
+      const currentTouchY = event.touches[0].clientY;
+      const deltaY = currentTouchY - lastTouchY;
+      lastTouchY = currentTouchY;
+      if (Math.abs(deltaY) < 2) return;
+
+      const scrollTarget = getScrollableParent(event.target) || pageScroller;
+      if (!scrollTarget) return;
+
+      const atTop = scrollTarget.scrollTop <= 0;
+      const atBottom = scrollTarget.scrollTop + scrollTarget.clientHeight >= scrollTarget.scrollHeight - 1;
+
+      if ((atTop && deltaY > 0) || (atBottom && deltaY < 0)) {
+        if (event.cancelable) event.preventDefault();
+      }
+    }, { passive: false });
   }
 
   /**
